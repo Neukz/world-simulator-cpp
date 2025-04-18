@@ -1,10 +1,9 @@
 #include "World.h"
+#include <iostream>
 
-World::World(int width, int height)
-	: width(width), height(height) {}
-
+#pragma region Private methods
 void World::eraseWorld() const {
-	std::cout << "\033[2J\033[H";	// Clear the screen
+	system("cls");	// Clear the screen
 }
 
 void World::drawHorizontalBorder() const {
@@ -14,13 +13,21 @@ void World::drawHorizontalBorder() const {
 	}
 	std::cout << ' ' << std::endl;
 }
+#pragma endregion
+
+#pragma region Public methods
+World::World(int width, int height)
+	: width(width), height(height) {}
 
 void World::makeTurn() {
-	throw std::logic_error("World::makeTurn not implemented");
+	for (Organism* organism : organisms) {
+		organism->action();
+	}
 }
 
 void World::drawWorld() {
 	eraseWorld();
+	std::cout << "Author: Kacper Neumann, 203394" << std::endl;
 	drawHorizontalBorder();
 
 	// Sort organisms by position an draw them
@@ -64,3 +71,4 @@ World::~World() {
 		delete organism;
 	}
 }
+#pragma endregion

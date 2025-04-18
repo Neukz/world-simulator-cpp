@@ -11,7 +11,7 @@ private:
 	char symbol;
 	Position position;
 	World* world;
-
+	
 public:
 	Organism(int strength, int initiative, char symbol, int x, int y, World* world);
 
@@ -21,6 +21,8 @@ public:
 	static bool compareByPosition(Organism* organism1, Organism* organism2);
 
 	void draw() const;
+
+	void setPosition(int x, int y);
 
 	int getStrength() const;
 	int getInitiative() const;
