@@ -36,6 +36,15 @@ void World::removeOrganism(Organism* organism) {
 World::World(int width, int height)
 	: width(width), height(height) {}
 
+Organism* World::getCollidingOrganism(Organism* organism) const {
+	auto other = std::find_if(
+		organisms.begin(), organisms.end(),
+		[organism](Organism* other) {
+		return other != organism && other->getPosition() == organism->getPosition();
+	});
+	return other == organisms.end() ? nullptr : *other;
+}
+
 void World::makeTurn() {
 	// Sort organisms by initiative and age, then call action() for each
 	organisms.sort(Organism::compareByInitiativeAndAge);
@@ -45,13 +54,9 @@ void World::makeTurn() {
 			organism->mature();
 			organism->action();
 			// Check for collision
-			auto other = std::find_if(
-				organisms.begin(), organisms.end(),
-				[organism](Organism* other) {
-					return other != organism && other->getPosition() == organism->getPosition();
-			});
-			if (other != organisms.end()) {
-				toRemove.push_back(organism->collision(*other));
+			Organism* other = getCollidingOrganism(organism);
+			if (other != nullptr) {
+				toRemove.push_back(organism->collision(other));
 			}
 		}
 	}

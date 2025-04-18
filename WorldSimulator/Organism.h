@@ -12,6 +12,8 @@ private:
 	int initiative;
 	char symbol;
 	Position position;
+
+protected:
 	World* world;
 	
 public:

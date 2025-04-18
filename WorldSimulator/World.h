@@ -25,6 +25,7 @@ public:
 
 	int getWidth() const;
 	int getHeight() const;
+	Organism* getCollidingOrganism(Organism* organism) const;
 
 	~World();
 };
