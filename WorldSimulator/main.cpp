@@ -5,10 +5,11 @@
 #include "Sheep.h"
 
 int main() {
+	std::setlocale(LC_ALL, "en_US.UTF-8");	// Support unicode characters
 	srand(time(nullptr));
 
 	World* world = new World(50, 20);
-	Wolf* wolf1 = new Wolf(10, 10, world);
+	Wolf* wolf1 = new Wolf(0, 0, world);
 	Sheep* sheep1 = new Sheep(1, 1, world);
 	Sheep* sheep2 = new Sheep(2, 0, world);
 

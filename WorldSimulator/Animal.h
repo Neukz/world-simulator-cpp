@@ -6,5 +6,7 @@ public:
 	Animal(int strength, int initiative, char symbol, int x, int y, World* world);
 
 	virtual void action() override;
-	virtual void collision(Organism* other) override;
+	virtual Organism* collision(Organism* other) override;
+
+	void breed() const;
 };

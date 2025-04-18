@@ -11,7 +11,10 @@ private:
 	std::list<Organism*> organisms;
 
 	void eraseWorld() const;
-	void drawHorizontalBorder() const;
+	void printTopBorder() const;
+	void printBottomBorder() const;
+	void printAuthor() const;
+	void removeOrganism(Organism* organism);
 
 public:
 	World(int width, int height);
@@ -19,7 +22,6 @@ public:
 	void makeTurn();
 	void drawWorld();
 	void addOrganism(Organism* organism);
-	void removeOrganism(Organism* organism);
 
 	int getWidth() const;
 	int getHeight() const;
