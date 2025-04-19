@@ -4,6 +4,12 @@ const int WOLF_STRENGTH = 9;
 const int WOLF_INITIATIVE = 5;
 const char WOLF_SYMBOL = 'W';
 
+#pragma region Protected methods
+std::string Wolf::getName() const {
+	return "Wolf";
+}
+#pragma endregion
+
 #pragma region Public methods
 Wolf::Wolf(int x, int y, World* world)
 	: Animal(WOLF_STRENGTH, WOLF_INITIATIVE, WOLF_SYMBOL, x, y, world) {}

@@ -12,13 +12,14 @@ void Animal::action() {
 		int dy = rand() % 3 - 1;
 		setPosition(position.getX() + dx, position.getY() + dy);
 	} while (position == getPosition());
+	setPrevPosition(position.getX(), position.getY());
 }
 
 Organism* Animal::collision(Organism* other) {
-	if (typeid(this) == typeid(other)) {
+	//if (typeid(*this) == typeid(*other)) {
 		//breed();
-		return nullptr;
-	}
+		//return nullptr;
+	//}
 	// Return the organism to be removed
 	if (this->getStrength() >= other->getStrength()) {
 		other->kill();

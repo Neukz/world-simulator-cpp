@@ -56,7 +56,9 @@ void World::makeTurn() {
 			// Check for collision
 			Organism* other = getCollidingOrganism(organism);
 			if (other != nullptr) {
-				toRemove.push_back(organism->collision(other));
+				Organism* loser = other->collision(organism);
+				Organism* winner = organism == loser ? other : organism;
+				toRemove.push_back(loser);
 			}
 		}
 	}
@@ -69,7 +71,7 @@ void World::makeTurn() {
 
 void World::drawWorld() {
 	//eraseWorld();
-	printAuthor();
+	//printAuthor();
 	printTopBorder();
 
 	// Sort organisms by position an draw them

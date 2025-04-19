@@ -1,9 +1,8 @@
 #include "Organism.h"
-#include <iostream>
 
 #pragma region Public methods
 Organism::Organism(int strength, int initiative, char symbol, int x, int y, World* world)
-	: strength(strength), initiative(initiative), symbol(symbol), position(x, y), world(world) {
+	: strength(strength), initiative(initiative), symbol(symbol), position(x, y), prevPosition(x, y), world(world) {
 	world->addOrganism(this);
 }
 
@@ -22,6 +21,10 @@ bool Organism::compareByInitiativeAndAge(Organism* organism1, Organism* organism
 
 void Organism::draw() const {
 	std::cout << symbol;
+}
+
+void Organism::identify() const {
+	std::cout << getName() << std::endl;
 }
 
 void Organism::mature() {
@@ -48,6 +51,11 @@ void Organism::setPosition(int x, int y) {
 	position.setY(y);
 }
 
+void Organism::setPrevPosition(int x, int y) {
+	prevPosition.setX(x);
+	prevPosition.setY(y);
+}
+
 int Organism::getStrength() const {
 	return strength;
 }
@@ -58,5 +66,9 @@ int Organism::getInitiative() const {
 
 Position Organism::getPosition() const {
 	return position;
+}
+
+Position Organism::getPrevPosition() const {
+	return prevPosition;
 }
 #pragma endregion

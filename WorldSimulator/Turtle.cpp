@@ -1,0 +1,40 @@
+#include "Turtle.h"
+//#include <typeinfo>
+
+const int TURTLE_STRENGTH = 2;
+const int TURTLE_INITIATIVE = 1;
+const char TURTLE_SYMBOL = 'T';
+
+#pragma region Private methods
+void Turtle::deflectAttack(Organism* attacker) const {
+	Position attackerPrevPosition = attacker->getPrevPosition();
+	attacker->setPosition(attackerPrevPosition.getX(), attackerPrevPosition.getY());
+}
+#pragma endregion
+
+#pragma region Protected methods
+std::string Turtle::getName() const {
+	return "Turtle";
+}
+#pragma endregion
+
+#pragma region Public methods
+Turtle::Turtle(int x, int y, World* world)
+	: Animal(TURTLE_STRENGTH, TURTLE_INITIATIVE, TURTLE_SYMBOL, x, y, world) {}
+
+void Turtle::action() {
+	bool holdPosition = (rand() % 100) < 75;	// 75% chance of staying still
+	if (holdPosition) {
+		return;
+	}
+	Animal::action();
+}
+
+Organism* Turtle::collision(Organism* other) {
+	if (typeid(*this) != typeid(*other) && other->getStrength() < 5) {
+		deflectAttack(other);
+		return nullptr;
+	}
+	return Animal::collision(other);
+}
+#pragma endregion
