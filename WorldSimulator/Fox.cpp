@@ -5,18 +5,16 @@ const int FOX_INITIATIVE = 7;
 const char FOX_SYMBOL = 'F';
 
 #pragma region Private methods
+std::string Fox::toString() const {
+	return "Fox";
+}
+
 bool Fox::encounteredStrongerOrganism() {
 	Organism* other = world->getCollidingOrganism(this);
 	if (other == nullptr) {
 		return false;
 	}
 	return other->getStrength() > this->getStrength();
-}
-#pragma endregion
-
-#pragma region Protected methods
-std::string Fox::getName() const {
-	return "Fox";
 }
 #pragma endregion
 

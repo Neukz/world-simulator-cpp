@@ -15,10 +15,10 @@ private:
 	Position position;
 	Position prevPosition;
 
+	virtual std::string toString() const = 0;
+
 protected:
 	World* world;
-
-	virtual std::string getName() const = 0;
 	
 public:
 	Organism(int strength, int initiative, char symbol, int x, int y, World* world);

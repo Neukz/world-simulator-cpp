@@ -5,15 +5,13 @@ const int TURTLE_INITIATIVE = 1;
 const char TURTLE_SYMBOL = 'T';
 
 #pragma region Private methods
+std::string Turtle::toString() const {
+	return "Turtle";
+}
+
 void Turtle::deflectAttack(Organism* attacker) const {
 	Position attackerPrevPosition = attacker->getPrevPosition();
 	attacker->setPosition(attackerPrevPosition);
-}
-#pragma endregion
-
-#pragma region Protected methods
-std::string Turtle::getName() const {
-	return "Turtle";
 }
 #pragma endregion
 

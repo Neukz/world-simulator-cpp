@@ -3,10 +3,8 @@
 
 class Antelope : public Animal {
 private:
+	std::string toString() const override;
 	void escape();
-
-protected:
-	std::string getName() const override;
 
 public:
 	Antelope(int x, int y, World* world);

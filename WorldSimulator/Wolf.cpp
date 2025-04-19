@@ -4,8 +4,8 @@ const int WOLF_STRENGTH = 9;
 const int WOLF_INITIATIVE = 5;
 const char WOLF_SYMBOL = 'W';
 
-#pragma region Protected methods
-std::string Wolf::getName() const {
+#pragma region Private methods
+std::string Wolf::toString() const {
 	return "Wolf";
 }
 #pragma endregion

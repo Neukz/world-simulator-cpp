@@ -3,10 +3,8 @@
 
 class Turtle : public Animal {
 private:
+	std::string toString() const override;
 	void deflectAttack(Organism* attacker) const;
-
-protected:
-	std::string getName() const override;
 
 public:
 	Turtle(int x, int y, World* world);

@@ -4,8 +4,8 @@ const int SHEEP_STRENGTH = 4;
 const int SHEEP_INITIATIVE = 4;
 const char SHEEP_SYMBOL = 'S';
 
-#pragma region Protected methods
-std::string Sheep::getName() const {
+#pragma region Private methods
+std::string Sheep::toString() const {
 	return "Sheep";
 }
 #pragma endregion

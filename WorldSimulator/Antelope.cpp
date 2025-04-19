@@ -5,6 +5,10 @@ const int ANTELOPE_INITIATIVE = 4;
 const char ANTELOPE_SYMBOL = 'A';
 
 #pragma region Private methods
+std::string Antelope::toString() const {
+	return "Antelope";
+}
+
 void Antelope::escape() {
 	Position position = getPosition();
 	do {
@@ -12,12 +16,6 @@ void Antelope::escape() {
 		setPosition(randomNeighbor);
 	} while (position == getPosition() || world->getCollidingOrganism(this) != nullptr);
 	setPrevPosition(position);
-}
-#pragma endregion
-
-#pragma region Protected methods
-std::string Antelope::getName() const {
-	return "Antelope";
 }
 #pragma endregion
 

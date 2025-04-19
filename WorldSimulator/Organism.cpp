@@ -24,7 +24,7 @@ void Organism::draw() const {
 }
 
 std::string Organism::identify() const {
-	return getName();
+	return toString();
 }
 
 void Organism::mature() {
