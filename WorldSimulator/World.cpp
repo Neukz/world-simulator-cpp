@@ -1,5 +1,4 @@
 ﻿#include "World.h"
-#include <iostream>
 
 #pragma region Private methods
 void World::eraseWorld() const {
@@ -30,11 +29,25 @@ void World::removeOrganism(Organism* organism) {
 	organisms.remove(organism);
 	delete organism;
 }
+
+void World::reportKill(Organism* winner, Organism* loser) const {
+	std::cout
+		<< loser->identify()
+		<< " has been killed by "
+		<< winner->identify()
+		<< " at "
+		<< loser->getPosition()
+		<< "."
+		<< std::endl;
+}
 #pragma endregion
 
 #pragma region Public methods
 World::World(int width, int height)
-	: width(width), height(height) {}
+	: width(width), height(height) {
+	std::setlocale(LC_ALL, "en_US.UTF-8");	// Support unicode characters
+	srand(time(nullptr));
+}
 
 Organism* World::getCollidingOrganism(Organism* organism) const {
 	auto other = std::find_if(
@@ -57,8 +70,11 @@ void World::makeTurn() {
 			Organism* other = getCollidingOrganism(organism);
 			if (other != nullptr) {
 				Organism* loser = other->collision(organism);
-				Organism* winner = organism == loser ? other : organism;
-				toRemove.push_back(loser);
+				if (loser != nullptr) {
+					Organism* winner = organism == loser ? other : organism;
+					toRemove.push_back(loser);
+					reportKill(winner, loser);
+				}
 			}
 		}
 	}

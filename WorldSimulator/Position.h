@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 class Position {
 private:
@@ -16,4 +17,5 @@ public:
 
 	bool operator<(const Position& other) const;
 	bool operator==(const Position& other) const;
+	friend std::ostream& operator<<(std::ostream& out, const Position& position);
 };

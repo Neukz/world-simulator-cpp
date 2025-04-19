@@ -15,6 +15,7 @@ private:
 	void printBottomBorder() const;
 	void printAuthor() const;
 	void removeOrganism(Organism* organism);
+	void reportKill(Organism* winner, Organism* loser) const;
 
 public:
 	World(int width, int height);

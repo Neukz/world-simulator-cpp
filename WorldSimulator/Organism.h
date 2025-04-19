@@ -30,7 +30,7 @@ public:
 	static bool compareByInitiativeAndAge(Organism* organism1, Organism* organism2);
 
 	void draw() const;
-	void identify() const;
+	std::string identify() const;
 
 	void mature();
 	void kill();

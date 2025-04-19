@@ -23,8 +23,8 @@ void Organism::draw() const {
 	std::cout << symbol;
 }
 
-void Organism::identify() const {
-	std::cout << getName() << std::endl;
+std::string Organism::identify() const {
+	return getName();
 }
 
 void Organism::mature() {

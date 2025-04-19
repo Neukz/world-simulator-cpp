@@ -30,4 +30,9 @@ bool Position::operator<(const Position& other) const {
 bool Position::operator==(const Position& other) const {
 	return x == other.x && y == other.y;
 }
+
+std::ostream& operator<<(std::ostream& out, const Position& position) {
+	out << "(" << position.x << "," << position.y << ")";
+	return out;
+}
 #pragma endregion
