@@ -130,8 +130,10 @@
     <ClCompile Include="Animal.cpp" />
     <ClCompile Include="Antelope.cpp" />
     <ClCompile Include="Fox.cpp" />
+    <ClCompile Include="Human.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Organism.cpp" />
+    <ClCompile Include="Plant.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="Sheep.cpp" />
     <ClCompile Include="Turtle.cpp" />
@@ -143,7 +145,9 @@
     <ClInclude Include="Antelope.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="Fox.h" />
+    <ClInclude Include="Human.h" />
     <ClInclude Include="Organism.h" />
+    <ClInclude Include="Plant.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Sheep.h" />
     <ClInclude Include="Turtle.h" />

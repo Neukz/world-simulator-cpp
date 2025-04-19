@@ -1,5 +1,11 @@
 #include "Organism.h"
 
+#pragma region Protected methods
+void Organism::reproduce() {
+	throw std::logic_error("Organism::reproduce not implemented");
+}
+#pragma endregion
+
 #pragma region Public methods
 Organism::Organism(int strength, int initiative, char symbol, int x, int y, World* world)
 	: strength(strength), initiative(initiative), symbol(symbol), position(x, y), prevPosition(x, y), world(world) {

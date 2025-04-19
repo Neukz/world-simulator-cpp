@@ -19,6 +19,8 @@ private:
 
 protected:
 	World* world;
+
+	void reproduce();
 	
 public:
 	Organism(int strength, int initiative, char symbol, int x, int y, World* world);

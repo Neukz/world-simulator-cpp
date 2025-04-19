@@ -1,12 +1,12 @@
 #pragma once
 #include "Organism.h"
 
-class Animal : public Organism {
+class Plant : public Organism {
 private:
 	virtual std::string toString() const = 0;
 
 public:
-	Animal(int strength, int initiative, char symbol, int x, int y, World* world);
+	Plant(int strength, char symbol, int x, int y, World* world);
 
 	virtual void action() override;
 	virtual Organism* collision(Organism* other) override;

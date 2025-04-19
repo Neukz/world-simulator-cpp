@@ -16,7 +16,7 @@ void Animal::action() {
 
 Organism* Animal::collision(Organism* other) {
 	//if (typeid(*this) == typeid(*other)) {
-		//breed();
+		//reproduce();
 		//return nullptr;
 	//}
 	// Return the organism to be removed
@@ -27,9 +27,5 @@ Organism* Animal::collision(Organism* other) {
 		this->kill();
 		return this;
 	}
-}
-
-void Animal::breed() const {
-	throw std::logic_error("Animal::breed not implemented");
 }
 #pragma endregion

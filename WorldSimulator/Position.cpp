@@ -10,9 +10,9 @@ Position Position::getRandomNeighbor(int range) const {
 	Direction direction = static_cast<Direction>(rand() % 4);
 	switch (direction) {
 		case Direction::Up:
-			return Position(x, y + range);
-		case Direction::Down:
 			return Position(x, y - range);
+		case Direction::Down:
+			return Position(x, y + range);
 		case Direction::Left:
 			return Position(x - range, y);
 		case Direction::Right:
