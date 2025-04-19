@@ -9,9 +9,9 @@ void Antelope::escape() {
 	Position position = getPosition();
 	do {
 		Position randomNeighbor = position.getRandomNeighbor(1);
-		setPosition(randomNeighbor.getX(), randomNeighbor.getY());
+		setPosition(randomNeighbor);
 	} while (position == getPosition() || world->getCollidingOrganism(this) != nullptr);
-	setPrevPosition(position.getX(), position.getY());
+	setPrevPosition(position);
 }
 #pragma endregion
 
@@ -29,9 +29,9 @@ void Antelope::action() {
 	Position position = getPosition();
 	do {
 		Position randomNeighbor = position.getRandomNeighbor(2);
-		setPosition(randomNeighbor.getX(), randomNeighbor.getY());
+		setPosition(randomNeighbor);
 	} while (position == getPosition());
-	setPrevPosition(position.getX(), position.getY());
+	setPrevPosition(position);
 }
 
 Organism* Antelope::collision(Organism* other) {

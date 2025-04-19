@@ -34,8 +34,8 @@ public:
 
 	void mature();
 	void kill();
-	void setPosition(int x, int y);
-	void setPrevPosition(int x, int y);
+	void setPosition(const Position& newPosition);
+	void setPrevPosition(const Position& newPosition);
 
 	int getAge() const;
 	bool isAlive() const;

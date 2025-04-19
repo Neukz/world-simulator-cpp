@@ -28,7 +28,7 @@ void Fox::action() {
 	Position position = getPosition();
 	do {
 		Position randomNeighbor = position.getRandomNeighbor(1);
-		setPosition(randomNeighbor.getX(), randomNeighbor.getY());
+		setPosition(randomNeighbor);
 	} while (position == getPosition() || encounteredStrongerOrganism());
 }
 #pragma endregion

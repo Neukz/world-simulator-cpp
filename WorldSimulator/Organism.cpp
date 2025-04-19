@@ -43,7 +43,9 @@ bool Organism::isAlive() const {
 	return alive;
 }
 
-void Organism::setPosition(int x, int y) {
+void Organism::setPosition(const Position& newPosition) {
+	int x = newPosition.getX();
+	int y = newPosition.getY();
 	if (x < 0 || y < 0 || x >= world->getWidth() || y >= world->getHeight()) {	// Position out of bounds
 		return;
 	}
@@ -51,9 +53,9 @@ void Organism::setPosition(int x, int y) {
 	position.setY(y);
 }
 
-void Organism::setPrevPosition(int x, int y) {
-	prevPosition.setX(x);
-	prevPosition.setY(y);
+void Organism::setPrevPosition(const Position& newPosition) {
+	prevPosition.setX(newPosition.getX());
+	prevPosition.setY(newPosition.getY());
 }
 
 int Organism::getStrength() const {

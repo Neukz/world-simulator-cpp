@@ -7,7 +7,7 @@ const char TURTLE_SYMBOL = 'T';
 #pragma region Private methods
 void Turtle::deflectAttack(Organism* attacker) const {
 	Position attackerPrevPosition = attacker->getPrevPosition();
-	attacker->setPosition(attackerPrevPosition.getX(), attackerPrevPosition.getY());
+	attacker->setPosition(attackerPrevPosition);
 }
 #pragma endregion
 
