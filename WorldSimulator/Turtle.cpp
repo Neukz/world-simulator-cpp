@@ -1,5 +1,4 @@
 #include "Turtle.h"
-//#include <typeinfo>
 
 const int TURTLE_STRENGTH = 2;
 const int TURTLE_INITIATIVE = 1;
@@ -23,8 +22,8 @@ Turtle::Turtle(int x, int y, World* world)
 	: Animal(TURTLE_STRENGTH, TURTLE_INITIATIVE, TURTLE_SYMBOL, x, y, world) {}
 
 void Turtle::action() {
-	bool holdPosition = (rand() % 100) < 75;	// 75% chance of staying still
-	if (holdPosition) {
+	bool shouldStay = (rand() % 100) < 75;	// 75% chance to stay still
+	if (shouldStay) {
 		return;
 	}
 	Animal::action();

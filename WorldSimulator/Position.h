@@ -9,6 +9,8 @@ private:
 public:
 	Position(int x, int y);
 
+	Position getRandomNeighbor(int range) const;
+
 	int getX() const;
 	int getY() const;
 

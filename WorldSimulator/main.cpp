@@ -5,6 +5,7 @@
 #include "Sheep.h"
 #include "Fox.h"
 #include "Turtle.h"
+#include "Antelope.h"
 
 int main() {
 	World* world = new World(50, 20);
@@ -13,6 +14,7 @@ int main() {
 	Fox* fox1 = new Fox(2, 2, world);
 	Turtle* turtle1 = new Turtle(2, 1, world);
 	Sheep* sheep2 = new Sheep(2, 0, world);
+	Antelope* antelope1 = new Antelope(2, 3, world);
 
 	try {
 		world->drawWorld();

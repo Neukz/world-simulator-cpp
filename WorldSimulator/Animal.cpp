@@ -8,9 +8,8 @@ Animal::Animal(int strength, int initiative, char symbol, int x, int y, World* w
 void Animal::action() {
 	Position position = getPosition();
 	do {
-		int dx = rand() % 3 - 1;	// Randomly choose -1/0/1
-		int dy = rand() % 3 - 1;
-		setPosition(position.getX() + dx, position.getY() + dy);
+		Position randomNeighbor = position.getRandomNeighbor(1);
+		setPosition(randomNeighbor.getX(), randomNeighbor.getY());
 	} while (position == getPosition());
 	setPrevPosition(position.getX(), position.getY());
 }
@@ -21,7 +20,7 @@ Organism* Animal::collision(Organism* other) {
 		//return nullptr;
 	//}
 	// Return the organism to be removed
-	if (this->getStrength() >= other->getStrength()) {
+	if (this->getStrength() > other->getStrength()) {
 		other->kill();
 		return other;
 	} else {

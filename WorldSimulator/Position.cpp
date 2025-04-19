@@ -1,8 +1,24 @@
 #include "Position.h"
+#include "Direction.h"
 
 #pragma region Public methods
 Position::Position(int x, int y)
 	: x(x), y(y) {}
+
+Position Position::getRandomNeighbor(int range) const {
+	// Select random direction and shift position by range
+	Direction direction = static_cast<Direction>(rand() % 4);
+	switch (direction) {
+		case Direction::Up:
+			return Position(x, y + range);
+		case Direction::Down:
+			return Position(x, y - range);
+		case Direction::Left:
+			return Position(x - range, y);
+		case Direction::Right:
+			return Position(x + range, y);
+	}
+}
 
 int Position::getX() const {
 	return x;

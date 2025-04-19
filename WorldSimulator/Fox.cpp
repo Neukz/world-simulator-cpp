@@ -27,9 +27,8 @@ Fox::Fox(int x, int y, World* world)
 void Fox::action() {
 	Position position = getPosition();
 	do {
-		int dx = rand() % 3 - 1;	// Randomly choose -1/0/1
-		int dy = rand() % 3 - 1;
-		setPosition(position.getX() + dx, position.getY() + dy);
+		Position randomNeighbor = position.getRandomNeighbor(1);
+		setPosition(randomNeighbor.getX(), randomNeighbor.getY());
 	} while (position == getPosition() || encounteredStrongerOrganism());
 }
 #pragma endregion
