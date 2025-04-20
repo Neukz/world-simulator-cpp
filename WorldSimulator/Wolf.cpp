@@ -8,6 +8,10 @@ const char WOLF_SYMBOL = 'W';
 std::string Wolf::toString() const {
 	return "Wolf";
 }
+
+Organism* Wolf::createNewInstance(int x, int y) {
+	return new Wolf(x, y, world);
+}
 #pragma endregion
 
 #pragma region Public methods

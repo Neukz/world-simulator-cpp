@@ -9,6 +9,10 @@ std::string Fox::toString() const {
 	return "Fox";
 }
 
+Organism* Fox::createNewInstance(int x, int y) {
+	return new Fox(x, y, world);
+}
+
 bool Fox::encounteredStrongerOrganism() {
 	Organism* other = world->getCollidingOrganism(this);
 	if (other == nullptr) {

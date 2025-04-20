@@ -16,11 +16,12 @@ private:
 	Position prevPosition;
 
 	virtual std::string toString() const = 0;
+	virtual Organism* createNewInstance(int x, int y) = 0;
 
 protected:
 	World* world;
 
-	void reproduce();
+	Organism* reproduce(Organism* other);
 	
 public:
 	Organism(int strength, int initiative, char symbol, int x, int y, World* world);

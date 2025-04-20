@@ -7,6 +7,8 @@ private:
 	int y;
 
 public:
+	static const Position InvalidPosition;
+
 	Position(int x, int y);
 
 	Position getRandomNeighbor(int range) const;

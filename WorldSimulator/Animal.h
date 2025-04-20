@@ -4,6 +4,7 @@
 class Animal : public Organism {
 private:
 	virtual std::string toString() const = 0;
+	virtual Organism* createNewInstance(int x, int y) = 0;
 
 public:
 	Animal(int strength, int initiative, char symbol, int x, int y, World* world);

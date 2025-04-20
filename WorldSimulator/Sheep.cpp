@@ -8,6 +8,10 @@ const char SHEEP_SYMBOL = 'S';
 std::string Sheep::toString() const {
 	return "Sheep";
 }
+
+Organism* Sheep::createNewInstance(int x, int y) {
+	return new Sheep(x, y, world);
+}
 #pragma endregion
 
 #pragma region Public methods

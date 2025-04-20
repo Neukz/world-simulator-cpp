@@ -1,4 +1,6 @@
 ﻿#include "World.h"
+#include <sstream>
+#include <vector>
 
 #pragma region Private methods
 void World::eraseWorld() const {
@@ -30,15 +32,34 @@ void World::removeOrganism(Organism* organism) {
 	delete organism;
 }
 
-void World::reportKill(Organism* winner, Organism* loser) const {
-	std::cout
+void World::reportKill(Organism* winner, Organism* loser) {
+	std::ostringstream info;
+	info
 		<< loser->identify()
 		<< " has been killed by "
 		<< winner->identify()
 		<< " at "
 		<< loser->getPosition()
-		<< "."
-		<< std::endl;
+		<< ".";
+	events.push(info.str());
+}
+
+void World::reportSpawn(Organism* organism) {
+	std::ostringstream info;
+	info
+		<< "A new "
+		<< organism->identify()
+		<< " has been spawned at "
+		<< organism->getPosition()
+		<< ".";
+	events.push(info.str());
+}
+
+void World::announceEvents() {
+	while (!events.empty()) {
+		std::cout << events.front() << std::endl;
+		events.pop();
+	}
 }
 #pragma endregion
 
@@ -49,31 +70,32 @@ World::World(int width, int height)
 	srand(time(nullptr));
 }
 
-Organism* World::getCollidingOrganism(Organism* organism) const {
-	auto other = std::find_if(
-		organisms.begin(), organisms.end(),
-		[organism](Organism* other) {
-		return other != organism && other->getPosition() == organism->getPosition();
-	});
-	return other == organisms.end() ? nullptr : *other;
-}
-
 void World::makeTurn() {
 	// Sort organisms by initiative and age, then call action() for each
 	organisms.sort(Organism::compareByInitiativeAndAge);
 	std::list<Organism*> toRemove;
+	int population = organisms.size(), i = 0;
 	for (Organism* organism : organisms) {
+		// Prevent new organisms from calling action() in the same turn they were spawned
+		if (i++ >= population) {
+			break;
+		}
 		if (organism->isAlive()) {
 			organism->mature();
 			organism->action();
 			// Check for collision
 			Organism* other = getCollidingOrganism(organism);
 			if (other != nullptr) {
-				Organism* loser = other->collision(organism);
-				if (loser != nullptr) {
-					Organism* winner = organism == loser ? other : organism;
-					toRemove.push_back(loser);
-					reportKill(winner, loser);
+				Organism* resultOrganism = other->collision(organism);
+				if (resultOrganism == nullptr) {
+					continue;
+				}
+				if (resultOrganism->isAlive()) {	// New organism was spawned
+					reportSpawn(resultOrganism);
+				} else {
+					Organism* winner = organism == resultOrganism ? other : organism;
+					toRemove.push_back(resultOrganism);
+					reportKill(winner, resultOrganism);
 				}
 			}
 		}
@@ -107,6 +129,56 @@ void World::drawWorld() {
 	}
 
 	printBottomBorder();
+	announceEvents();
+}
+
+void World::addOrganism(Organism* organism) {
+	organisms.push_back(organism);
+}
+
+bool World::positionWithinBounds(const Position& position) const {
+	int x = position.getX();
+	int y = position.getY();
+	return x >= 0 && y >= 0 && x < width && y < height;
+}
+
+Organism* World::getOrganismAt(const Position& position) const {
+	auto organism = std::find_if(
+		organisms.begin(), organisms.end(),
+		[position](Organism* organism) {
+		return organism->isAlive() && organism->getPosition() == position;
+	});
+	return organism == organisms.end() ? nullptr : *organism;
+}
+
+Organism* World::getCollidingOrganism(Organism* organism) const {
+	auto other = std::find_if(
+		organisms.begin(), organisms.end(),
+		[organism](Organism* other) {
+		return other->isAlive() && other != organism && other->getPosition() == organism->getPosition();
+	});
+	return other == organisms.end() ? nullptr : *other;
+}
+
+Position World::getRandomFreeNeighboringField(Organism* organism) const {
+	Position position = organism->getPosition();
+	int x = position.getX();
+	int y = position.getY();
+	std::vector<Position> neighbors = {
+		Position(x, y - 1),
+		Position(x, y + 1),
+		Position(x - 1, y),
+		Position(x + 1, y)
+	};
+	while (!neighbors.empty()) {
+		int i = rand() % neighbors.size();
+		Position randomNeighbor = neighbors[i];
+		if (positionWithinBounds(randomNeighbor) && getOrganismAt(randomNeighbor) == nullptr) {
+			return randomNeighbor;
+		}
+		neighbors.erase(neighbors.begin() + i);
+	}
+	return Position::InvalidPosition;	// All neighboring fields are occupied
 }
 
 int World::getWidth() const {
@@ -115,10 +187,6 @@ int World::getWidth() const {
 
 int World::getHeight() const {
 	return height;
-}
-
-void World::addOrganism(Organism* organism) {
-	organisms.push_back(organism);
 }
 
 World::~World() {

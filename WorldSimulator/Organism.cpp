@@ -1,8 +1,19 @@
 #include "Organism.h"
 
 #pragma region Protected methods
-void Organism::reproduce() {
-	throw std::logic_error("Organism::reproduce not implemented");
+Organism* Organism::reproduce(Organism* other) {
+	// Go back to previous position
+	Position otherPrevPosition = other->getPrevPosition();
+	other->setPosition(otherPrevPosition);
+
+	Position position = getPosition();
+	Position childPosition = world->getRandomFreeNeighboringField(this);
+	if (childPosition == Position::InvalidPosition) {
+		return nullptr;	// No space to reproduce
+	}
+	int childX = childPosition.getX();
+	int childY = childPosition.getY();
+	return createNewInstance(childX, childY);
 }
 #pragma endregion
 
@@ -50,13 +61,12 @@ bool Organism::isAlive() const {
 }
 
 void Organism::setPosition(const Position& newPosition) {
-	int x = newPosition.getX();
-	int y = newPosition.getY();
-	if (x < 0 || y < 0 || x >= world->getWidth() || y >= world->getHeight()) {	// Position out of bounds
-		return;
+	if (world->positionWithinBounds(newPosition)) {
+		int x = newPosition.getX();
+		int y = newPosition.getY();
+		position.setX(x);
+		position.setY(y);
 	}
-	position.setX(x);
-	position.setY(y);
 }
 
 void Organism::setPrevPosition(const Position& newPosition) {

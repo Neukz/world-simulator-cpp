@@ -1,6 +1,8 @@
 #include "Position.h"
 #include "Direction.h"
 
+const Position Position::InvalidPosition = Position(-1, -1);
+
 #pragma region Public methods
 Position::Position(int x, int y)
 	: x(x), y(y) {}

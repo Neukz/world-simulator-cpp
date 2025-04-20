@@ -9,6 +9,10 @@ std::string Turtle::toString() const {
 	return "Turtle";
 }
 
+Organism* Turtle::createNewInstance(int x, int y) {
+	return new Turtle(x, y, world);
+}
+
 void Turtle::deflectAttack(Organism* attacker) const {
 	Position attackerPrevPosition = attacker->getPrevPosition();
 	attacker->setPosition(attackerPrevPosition);

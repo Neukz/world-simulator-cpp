@@ -9,6 +9,10 @@ std::string Antelope::toString() const {
 	return "Antelope";
 }
 
+Organism* Antelope::createNewInstance(int x, int y) {
+	return new Antelope(x, y, world);
+}
+
 void Antelope::escape() {
 	Position position = getPosition();
 	do {

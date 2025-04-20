@@ -9,6 +9,12 @@ void Plant::action() {
 }
 
 Organism* Plant::collision(Organism* other) {
-	throw std::logic_error("Plant::collision not implemented");
+	if (this->getStrength() > other->getStrength()) {
+		other->kill();
+		return other;
+	} else {
+		this->kill();
+		return this;
+	}
 }
 #pragma endregion

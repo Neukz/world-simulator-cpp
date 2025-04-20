@@ -1,5 +1,4 @@
 #include "Animal.h"
-#include <iostream>
 
 #pragma region Public methods
 Animal::Animal(int strength, int initiative, char symbol, int x, int y, World* world)
@@ -15,10 +14,10 @@ void Animal::action() {
 }
 
 Organism* Animal::collision(Organism* other) {
-	//if (typeid(*this) == typeid(*other)) {
-		//reproduce();
-		//return nullptr;
-	//}
+	if (typeid(*this) == typeid(*other)) {
+		Organism* child = reproduce(other);
+		return child;
+	}
 	// Return the organism to be removed
 	if (this->getStrength() > other->getStrength()) {
 		other->kill();
