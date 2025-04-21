@@ -36,11 +36,10 @@ void Antelope::action() {
 	setPrevPosition(position);
 }
 
-Organism* Antelope::collision(Organism* other) {
+void Antelope::collision(Organism* other) {
 	bool shouldEscape = (rand() % 100) < 50;	// 50% chance to escape from fight
 	if (shouldEscape) {
-		escape();
-		return nullptr;
+		return escape();
 	}
 	Animal::collision(other);
 }

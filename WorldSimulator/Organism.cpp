@@ -1,17 +1,16 @@
 #include "Organism.h"
 
 #pragma region Protected methods
-Organism* Organism::reproduce() {
+void Organism::reproduce() {
 	Position position = getPosition();
 	Position childPosition = world->getRandomFreeNeighboringField(this);
 	if (childPosition == Position::InvalidPosition) {
-		return nullptr;	// No space to reproduce
+		return;	// No space to reproduce
 	}
 	int childX = childPosition.getX();
 	int childY = childPosition.getY();
 	Organism* child = createNewInstance(childX, childY);
 	world->addOrganism(child);
-	return child;
 }
 #pragma endregion
 
@@ -44,8 +43,9 @@ void Organism::mature() {
 	age++;
 }
 
-void Organism::kill() {
+void Organism::kill(Organism* killer) {
 	alive = false;
+	world->reportDeath(killer, this);
 }
 
 void Organism::setStrength(int strength) {

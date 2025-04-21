@@ -10,5 +10,5 @@ private:
 public:
 	Guarana(int x, int y, World* world);
 
-	Organism* collision(Organism* other) override;
+	void collision(Organism* other) override;
 };

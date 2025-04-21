@@ -31,11 +31,10 @@ void Turtle::action() {
 	Animal::action();
 }
 
-Organism* Turtle::collision(Organism* other) {
+void Turtle::collision(Organism* other) {
 	if (typeid(*this) != typeid(*other) && other->getStrength() < 5) {
-		deflectAttack(other);
-		return nullptr;
+		return deflectAttack(other);
 	}
-	return Animal::collision(other);
+	Animal::collision(other);
 }
 #pragma endregion

@@ -10,11 +10,11 @@ private:
 	virtual Organism* createNewInstance(int x, int y) = 0;
 
 protected:
-	Organism* sow();
+	void sow();
 
 public:
 	Plant(int strength, char symbol, int x, int y, World* world);
 
 	virtual void action() override;
-	virtual Organism* collision(Organism* other) override;
+	virtual void collision(Organism* other) override;
 };

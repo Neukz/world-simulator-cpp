@@ -32,7 +32,7 @@ int main() {
 		while (true) {
 			if (_kbhit()) {
 				char key = _getch();
-				if (key == 13) {
+				if (key == '\\') {
 					world->makeTurn();
 					world->drawWorld();
 				}

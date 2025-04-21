@@ -17,8 +17,7 @@ private:
 	void printTopBorder() const;
 	void printBottomBorder() const;
 	void printAuthor() const;
-	void removeOrganism(Organism* organism);
-	void reportDeath(Organism* winner, Organism* loser);
+	void removeDeadOrganisms();
 	void reportSpawn(Organism* organism);
 	void announceEvents();
 
@@ -28,6 +27,7 @@ public:
 	void makeTurn();
 	void drawWorld();
 	void populate(std::initializer_list<Organism*> organisms);
+	void reportDeath(Organism* winner, Organism* loser);
 	void addOrganism(Organism* organism);
 	bool positionWithinBounds(const Position& position) const;
 	Organism* getOrganismAt(const Position& position) const;

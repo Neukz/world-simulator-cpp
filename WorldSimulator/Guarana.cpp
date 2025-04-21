@@ -22,9 +22,8 @@ void Guarana::boostEater(Organism* eater) {
 Guarana::Guarana(int x, int y, World* world)
 	: Plant(GUARANA_STRENGTH, GUARANA_SYMBOL, x, y, world) {}
 
-Organism* Guarana::collision(Organism* other) {
+void Guarana::collision(Organism* other) {
 	boostEater(other);
-	this->kill();
-	return this;
+	Plant::collision(other);
 }
 #pragma endregion

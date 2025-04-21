@@ -15,5 +15,5 @@ public:
 	Human(int x, int y, World* world);
 
 	void action() override;
-	Organism* collision(Organism* other) override;
+	void collision(Organism* other) override;
 };

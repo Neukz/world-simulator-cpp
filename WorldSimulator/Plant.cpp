@@ -3,12 +3,11 @@
 const int Plant::SowingProbability = 10;
 
 #pragma region Protected methods
-Organism* Plant::sow() {
+void Plant::sow() {
 	bool canReproduce = (rand() % 100) < SowingProbability;
 	if (canReproduce) {
-		return reproduce();
+		reproduce();
 	}
-	return nullptr;
 }
 #pragma endregion
 
@@ -20,13 +19,7 @@ void Plant::action() {
 	sow();
 }
 
-Organism* Plant::collision(Organism* other) {
-	if (this->getStrength() > other->getStrength()) {
-		other->kill();
-		return other;
-	} else {
-		this->kill();
-		return this;
-	}
+void Plant::collision(Organism* other) {
+	this->kill(other);
 }
 #pragma endregion

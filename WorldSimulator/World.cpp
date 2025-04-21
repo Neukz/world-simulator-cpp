@@ -28,28 +28,14 @@ void World::printAuthor() const {
 	std::cout << "Author: Kacper Neumann, 203394" << std::endl;
 }
 
-void World::removeOrganism(Organism* organism) {
-	organisms.remove(organism);
-	delete organism;
-}
-
-void World::reportDeath(Organism* winner, Organism* loser) {
-	// If the loser was a Plant, that means it was eaten
-	std::string reason = dynamic_cast<Plant*>(loser) ? "eaten" : "killed";
-
-	std::ostringstream info;
-	info
-		<< "\033[31m"
-		<< loser->identify()
-		<< " has been "
-		<< reason
-		<< " by "
-		<< winner->identify()
-		<< " at "
-		<< loser->getPosition()
-		<< ".\033[0m";
-
-	events.push(info.str());
+void World::removeDeadOrganisms() {
+	organisms.remove_if([](Organism* organism) {
+		if (!organism->isAlive()) {
+			delete organism;
+			return true;
+		}
+		return false;
+	});
 }
 
 void World::reportSpawn(Organism* organism) {
@@ -80,9 +66,7 @@ World::World(int width, int height)
 }
 
 void World::makeTurn() {
-	// Sort organisms by initiative and age
 	organisms.sort(Organism::compareByInitiativeAndAge);
-	std::list<Organism*> toRemove;
 	int populationInTurn = organisms.size(), populationCount = 0;
 	for (Organism* organism : organisms) {
 		// Prevent new organisms from calling action() in the same turn they were spawned
@@ -105,21 +89,11 @@ void World::makeTurn() {
 				continue;
 			}
 
-			Organism* resultOrganism = other->collision(organism);
-			if (resultOrganism == nullptr || resultOrganism->isAlive()) {	// Both survived or new Animal was spawned
-				continue;
-			}
-
-			Organism* winner = organism == resultOrganism ? other : organism;
-			toRemove.push_back(resultOrganism);
-			reportDeath(winner, resultOrganism);
+			other->collision(organism);
 		}
 	}
 
-	// Remove organisms that lost their fights
-	for (Organism* organism : toRemove) {
-		removeOrganism(organism);
-	}
+	removeDeadOrganisms();
 }
 
 void World::drawWorld() {
@@ -151,6 +125,25 @@ void World::populate(std::initializer_list<Organism*> organisms) {
 	for (Organism* organism : organisms) {
 		addOrganism(organism);
 	}
+}
+
+void World::reportDeath(Organism* winner, Organism* loser) {
+	// If the loser was a Plant, that means it was eaten
+	std::string reason = dynamic_cast<Plant*>(loser) ? "eaten" : "killed";
+
+	std::ostringstream info;
+	info
+		<< "\033[31m"
+		<< loser->identify()
+		<< " has been "
+		<< reason
+		<< " by "
+		<< winner->identify()
+		<< " at "
+		<< loser->getPosition()
+		<< ".\033[0m";
+
+	events.push(info.str());
 }
 
 void World::addOrganism(Organism* organism) {

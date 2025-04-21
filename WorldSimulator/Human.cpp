@@ -57,7 +57,7 @@ void Human::action() {
 	setPrevPosition(position);
 }
 
-Organism* Human::collision(Organism* other) {
+void Human::collision(Organism* other) {
 	throw std::logic_error("Human::collision not implemented");
 }
 #pragma endregion
