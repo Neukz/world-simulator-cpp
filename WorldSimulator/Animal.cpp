@@ -1,5 +1,14 @@
 #include "Animal.h"
 
+#pragma region Private methods
+Organism* Animal::breed(Organism* other) {
+	// Go back to previous position
+	Position otherPrevPosition = other->getPrevPosition();
+	other->setPosition(otherPrevPosition);
+	return reproduce();
+}
+#pragma endregion
+
 #pragma region Public methods
 Animal::Animal(int strength, int initiative, char symbol, int x, int y, World* world)
 	: Organism(strength, initiative, symbol, x, y, world) {}
@@ -15,7 +24,7 @@ void Animal::action() {
 
 Organism* Animal::collision(Organism* other) {
 	if (typeid(*this) == typeid(*other)) {
-		Organism* child = reproduce(other);
+		Organism* child = breed(other);
 		return child;
 	}
 	// Return the organism to be removed

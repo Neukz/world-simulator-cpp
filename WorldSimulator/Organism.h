@@ -21,7 +21,7 @@ private:
 protected:
 	World* world;
 
-	Organism* reproduce(Organism* other);
+	Organism* reproduce();
 	
 public:
 	Organism(int strength, int initiative, char symbol, int x, int y, World* world);

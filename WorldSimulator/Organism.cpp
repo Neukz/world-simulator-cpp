@@ -1,11 +1,7 @@
 #include "Organism.h"
 
 #pragma region Protected methods
-Organism* Organism::reproduce(Organism* other) {
-	// Go back to previous position
-	Position otherPrevPosition = other->getPrevPosition();
-	other->setPosition(otherPrevPosition);
-
+Organism* Organism::reproduce() {
 	Position position = getPosition();
 	Position childPosition = world->getRandomFreeNeighboringField(this);
 	if (childPosition == Position::InvalidPosition) {
@@ -13,15 +9,15 @@ Organism* Organism::reproduce(Organism* other) {
 	}
 	int childX = childPosition.getX();
 	int childY = childPosition.getY();
-	return createNewInstance(childX, childY);
+	Organism* child = createNewInstance(childX, childY);
+	world->addOrganism(child);
+	return child;
 }
 #pragma endregion
 
 #pragma region Public methods
 Organism::Organism(int strength, int initiative, char symbol, int x, int y, World* world)
-	: strength(strength), initiative(initiative), symbol(symbol), position(x, y), prevPosition(x, y), world(world) {
-	world->addOrganism(this);
-}
+	: strength(strength), initiative(initiative), symbol(symbol), position(x, y), prevPosition(x, y), world(world) {}
 
 bool Organism::compareByPosition(Organism* organism1, Organism* organism2) {
 	return organism1->getPosition() < organism2->getPosition();

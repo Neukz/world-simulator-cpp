@@ -1,6 +1,8 @@
 ﻿#include "World.h"
 #include <sstream>
 #include <vector>
+#include "Animal.h"
+#include "Plant.h"
 
 #pragma region Private methods
 void World::eraseWorld() const {
@@ -32,15 +34,21 @@ void World::removeOrganism(Organism* organism) {
 	delete organism;
 }
 
-void World::reportKill(Organism* winner, Organism* loser) {
+void World::reportDeath(Organism* winner, Organism* loser) {
+	// If the loser was a Plant, that means it was eaten
+	std::string reason = dynamic_cast<Plant*>(loser) ? "eaten" : "killed";
+
 	std::ostringstream info;
 	info
 		<< loser->identify()
-		<< " has been killed by "
+		<< " has been "
+		<< reason
+		<< " by "
 		<< winner->identify()
 		<< " at "
 		<< loser->getPosition()
 		<< ".";
+
 	events.push(info.str());
 }
 
@@ -52,6 +60,7 @@ void World::reportSpawn(Organism* organism) {
 		<< " has been spawned at "
 		<< organism->getPosition()
 		<< ".";
+
 	events.push(info.str());
 }
 
@@ -71,32 +80,42 @@ World::World(int width, int height)
 }
 
 void World::makeTurn() {
-	// Sort organisms by initiative and age, then call action() for each
+	// Sort organisms by initiative and age
 	organisms.sort(Organism::compareByInitiativeAndAge);
 	std::list<Organism*> toRemove;
-	int population = organisms.size(), i = 0;
+	int populationInTurn = organisms.size(), populationCount = 0;
 	for (Organism* organism : organisms) {
 		// Prevent new organisms from calling action() in the same turn they were spawned
-		if (i++ >= population) {
+		if (populationCount++ >= populationInTurn) {
 			break;
 		}
-		if (organism->isAlive()) {
-			organism->mature();
-			organism->action();
-			// Check for collision
+
+		// Skip dead organisms
+		if (!organism->isAlive()) {
+			continue;
+		}
+
+		organism->mature();
+		organism->action();
+
+		// If it's an Animal, check for collision
+		if (dynamic_cast<Animal*>(organism)) {
 			Organism* other = getCollidingOrganism(organism);
-			if (other != nullptr) {
-				Organism* resultOrganism = other->collision(organism);
-				if (resultOrganism == nullptr) {
-					continue;
-				}
-				if (resultOrganism->isAlive()) {	// New organism was spawned
-					reportSpawn(resultOrganism);
-				} else {
-					Organism* winner = organism == resultOrganism ? other : organism;
-					toRemove.push_back(resultOrganism);
-					reportKill(winner, resultOrganism);
-				}
+			if (other == nullptr) {
+				continue;
+			}
+
+			Organism* resultOrganism = other->collision(organism);
+			if (resultOrganism == nullptr) {	// Both survived
+				continue;
+			}
+
+			if (resultOrganism->isAlive()) {	// New organism was spawned
+				reportSpawn(resultOrganism);
+			} else {
+				Organism* winner = organism == resultOrganism ? other : organism;
+				toRemove.push_back(resultOrganism);
+				reportDeath(winner, resultOrganism);
 			}
 		}
 	}
@@ -132,8 +151,15 @@ void World::drawWorld() {
 	announceEvents();
 }
 
+void World::populate(std::initializer_list<Organism*> organisms) {
+	for (Organism* organism : organisms) {
+		addOrganism(organism);
+	}
+}
+
 void World::addOrganism(Organism* organism) {
 	organisms.push_back(organism);
+	reportSpawn(organism);
 }
 
 bool World::positionWithinBounds(const Position& position) const {
