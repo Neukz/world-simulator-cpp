@@ -60,6 +60,9 @@
     <ClCompile Include="Guarana.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Belladonna.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Organism.h">
@@ -105,6 +108,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Guarana.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Belladonna.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
