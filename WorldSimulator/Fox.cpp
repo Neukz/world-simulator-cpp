@@ -28,10 +28,16 @@ Fox::Fox(int x, int y, World* world)
 
 void Fox::action() {
 	Position position = getPosition();
-	do {
-		Position randomNeighbor = position.getRandomNeighbor(1);
+	std::vector<Position> neighbors = position.getNeighbors();
+	while (!neighbors.empty()) {
+		int i = rand() % neighbors.size();
+		Position randomNeighbor = neighbors[i];
 		setPosition(randomNeighbor);
-	} while (position == getPosition() || encounteredStrongerOrganism());
-	setPrevPosition(position);
+		neighbors.erase(neighbors.begin() + i);
+		if (position != getPosition() && !encounteredStrongerOrganism()) {
+			setPrevPosition(position);
+			break;
+		}
+	}
 }
 #pragma endregion

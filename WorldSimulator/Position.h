@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
 class Position {
 private:
@@ -11,6 +12,7 @@ public:
 
 	Position(int x, int y);
 
+	std::vector<Position> getNeighbors() const;
 	Position getRandomNeighbor(int range) const;
 
 	int getX() const;
@@ -21,5 +23,6 @@ public:
 
 	bool operator<(const Position& other) const;
 	bool operator==(const Position& other) const;
+	bool operator!=(const Position& other) const;
 	friend std::ostream& operator<<(std::ostream& out, const Position& position);
 };

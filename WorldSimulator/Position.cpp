@@ -7,6 +7,16 @@ const Position Position::InvalidPosition = Position(-1, -1);
 Position::Position(int x, int y)
 	: x(x), y(y) {}
 
+std::vector<Position> Position::getNeighbors() const {
+	std::vector<Position> neighbors = {
+		Position(x, y - 1),
+		Position(x, y + 1),
+		Position(x - 1, y),
+		Position(x + 1, y)
+	};
+	return neighbors;
+}
+
 Position Position::getRandomNeighbor(int range) const {
 	// Select random direction and shift position by range
 	Direction direction = static_cast<Direction>(rand() % 4);
@@ -47,6 +57,10 @@ bool Position::operator<(const Position& other) const {
 
 bool Position::operator==(const Position& other) const {
 	return x == other.x && y == other.y;
+}
+
+bool Position:: operator!=(const Position& other) const {
+	return x != other.x || y != other.y;
 }
 
 std::ostream& operator<<(std::ostream& out, const Position& position) {

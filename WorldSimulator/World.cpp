@@ -1,6 +1,5 @@
 ﻿#include "World.h"
 #include <sstream>
-#include <vector>
 #include "Animal.h"
 #include "Plant.h"
 
@@ -185,14 +184,7 @@ Organism* World::getCollidingOrganism(Organism* organism) const {
 
 Position World::getRandomFreeNeighboringField(Organism* organism) const {
 	Position position = organism->getPosition();
-	int x = position.getX();
-	int y = position.getY();
-	std::vector<Position> neighbors = {
-		Position(x, y - 1),
-		Position(x, y + 1),
-		Position(x - 1, y),
-		Position(x + 1, y)
-	};
+	std::vector<Position> neighbors = position.getNeighbors();
 	while (!neighbors.empty()) {
 		int i = rand() % neighbors.size();
 		Position randomNeighbor = neighbors[i];
