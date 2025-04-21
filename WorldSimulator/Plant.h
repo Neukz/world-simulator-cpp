@@ -8,8 +8,6 @@ private:
 
 	virtual std::string toString() const = 0;
 	virtual Organism* createNewInstance(int x, int y) = 0;
-
-protected:
 	void sow();
 
 public:

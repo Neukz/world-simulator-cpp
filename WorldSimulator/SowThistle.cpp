@@ -19,7 +19,7 @@ SowThistle::SowThistle(int x, int y, World* world)
 
 void SowThistle::action() {
 	for (int i = 0; i < 3; i++) {
-		sow();
+		Plant::action();
 	}
 }
 #pragma endregion
