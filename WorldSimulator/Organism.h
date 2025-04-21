@@ -37,6 +37,7 @@ public:
 
 	void mature();
 	void kill();
+	void setStrength(int strength);
 	void setPosition(const Position& newPosition);
 	void setPrevPosition(const Position& newPosition);
 

@@ -1,6 +1,6 @@
 #include "Plant.h"
 
-const int Plant::SowingProbability = 15;
+const int Plant::SowingProbability = 10;
 
 #pragma region Protected methods
 Organism* Plant::sow() {

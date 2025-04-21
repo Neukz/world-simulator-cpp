@@ -1,4 +1,3 @@
-#include <iostream>
 #include <conio.h>
 #include "World.h"
 #include "Wolf.h"
@@ -8,6 +7,7 @@
 #include "Antelope.h"
 #include "Grass.h"
 #include "SowThistle.h"
+#include "Guarana.h"
 
 int main() {
 	World* world = new World(20, 10);
@@ -23,7 +23,8 @@ int main() {
 
 		// Plants
 		new Grass(5, 5, world),
-		new SowThistle(5, 8, world)
+		new SowThistle(5, 8, world),
+		new Guarana(13, 3, world)
 	});
 
 	try {

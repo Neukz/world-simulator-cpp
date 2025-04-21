@@ -48,6 +48,10 @@ void Organism::kill() {
 	alive = false;
 }
 
+void Organism::setStrength(int strength) {
+	this->strength = strength;
+}
+
 int Organism::getAge() const {
 	return age;
 }
