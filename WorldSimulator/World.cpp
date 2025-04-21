@@ -107,17 +107,13 @@ void World::makeTurn() {
 			}
 
 			Organism* resultOrganism = other->collision(organism);
-			if (resultOrganism == nullptr) {	// Both survived
+			if (resultOrganism == nullptr || resultOrganism->isAlive()) {	// Both survived or new Animal was spawned
 				continue;
 			}
 
-			if (resultOrganism->isAlive()) {	// New organism was spawned
-				reportSpawn(resultOrganism);
-			} else {
-				Organism* winner = organism == resultOrganism ? other : organism;
-				toRemove.push_back(resultOrganism);
-				reportDeath(winner, resultOrganism);
-			}
+			Organism* winner = organism == resultOrganism ? other : organism;
+			toRemove.push_back(resultOrganism);
+			reportDeath(winner, resultOrganism);
 		}
 	}
 
