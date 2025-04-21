@@ -40,6 +40,7 @@ void World::reportDeath(Organism* winner, Organism* loser) {
 
 	std::ostringstream info;
 	info
+		<< "\033[31m"
 		<< loser->identify()
 		<< " has been "
 		<< reason
@@ -47,7 +48,7 @@ void World::reportDeath(Organism* winner, Organism* loser) {
 		<< winner->identify()
 		<< " at "
 		<< loser->getPosition()
-		<< ".";
+		<< ".\033[0m";
 
 	events.push(info.str());
 }
@@ -55,11 +56,11 @@ void World::reportDeath(Organism* winner, Organism* loser) {
 void World::reportSpawn(Organism* organism) {
 	std::ostringstream info;
 	info
-		<< "A new "
+		<< "\033[32m"
 		<< organism->identify()
 		<< " has been spawned at "
 		<< organism->getPosition()
-		<< ".";
+		<< ".\033[0m";
 
 	events.push(info.str());
 }

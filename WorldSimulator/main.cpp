@@ -7,6 +7,7 @@
 #include "Turtle.h"
 #include "Antelope.h"
 #include "Grass.h"
+#include "SowThistle.h"
 
 int main() {
 	World* world = new World(20, 10);
@@ -21,7 +22,8 @@ int main() {
 		new Antelope(3, 9, world),
 
 		// Plants
-		new Grass(0, 0, world)
+		new Grass(5, 5, world),
+		new SowThistle(5, 8, world)
 	});
 
 	try {
