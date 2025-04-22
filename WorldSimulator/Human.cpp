@@ -1,10 +1,6 @@
 #include "Human.h"
 #include "conio.h"
 
-const int HUMAN_STRENGTH = 5;
-const int HUMAN_INITIATIVE = 4;
-const char HUMAN_SYMBOL = 'H';
-
 const std::unordered_map<int, Direction> Human::KeyToDirection = {
 	{72, Direction::Up},
 	{80, Direction::Down},
@@ -45,7 +41,7 @@ void Human::move(Direction direction) {
 
 #pragma region Public methods
 Human::Human(int x, int y, World* world)
-	: Animal(HUMAN_STRENGTH, HUMAN_INITIATIVE, HUMAN_SYMBOL, x, y, world) {}
+	: Animal(Strength, Initiative, Symbol, x, y, world) {}
 
 void Human::action() {
 	Position position = getPosition();

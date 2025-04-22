@@ -1,9 +1,5 @@
 #include "Turtle.h"
 
-const int TURTLE_STRENGTH = 2;
-const int TURTLE_INITIATIVE = 1;
-const char TURTLE_SYMBOL = 'T';
-
 #pragma region Private methods
 std::string Turtle::toString() const {
 	return "Turtle";
@@ -21,7 +17,7 @@ void Turtle::deflectAttack(Organism* attacker) const {
 
 #pragma region Public methods
 Turtle::Turtle(int x, int y, World* world)
-	: Animal(TURTLE_STRENGTH, TURTLE_INITIATIVE, TURTLE_SYMBOL, x, y, world) {}
+	: Animal(Strength, Initiative, Symbol, x, y, world) {}
 
 void Turtle::action() {
 	bool shouldStay = (rand() % 100) < 75;	// 75% chance to stay still

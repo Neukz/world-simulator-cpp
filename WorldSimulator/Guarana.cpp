@@ -1,8 +1,5 @@
 #include "Guarana.h"
 
-const int GUARANA_STRENGTH = 0;
-const char GUARANA_SYMBOL = 'u';
-
 #pragma region Private methods
 std::string Guarana::toString() const {
 	return "Guarana";
@@ -20,7 +17,7 @@ void Guarana::boostEater(Organism* eater) {
 
 #pragma region Public methods
 Guarana::Guarana(int x, int y, World* world)
-	: Plant(GUARANA_STRENGTH, GUARANA_SYMBOL, x, y, world) {}
+	: Plant(Strength, Symbol, x, y, world) {}
 
 void Guarana::collision(Organism* other) {
 	boostEater(other);

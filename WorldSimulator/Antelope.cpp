@@ -1,9 +1,5 @@
 #include "Antelope.h"
 
-const int ANTELOPE_STRENGTH = 4;
-const int ANTELOPE_INITIATIVE = 4;
-const char ANTELOPE_SYMBOL = 'A';
-
 #pragma region Private methods
 std::string Antelope::toString() const {
 	return "Antelope";
@@ -25,7 +21,7 @@ void Antelope::escape() {
 
 #pragma region Public methods
 Antelope::Antelope(int x, int y, World* world)
-	: Animal(ANTELOPE_STRENGTH, ANTELOPE_INITIATIVE, ANTELOPE_SYMBOL, x, y, world) {}
+	: Animal(Strength, Initiative, Symbol, x, y, world) {}
 
 void Antelope::action() {
 	Position position = getPosition();

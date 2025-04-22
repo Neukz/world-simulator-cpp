@@ -1,9 +1,5 @@
 #include "Fox.h"
 
-const int FOX_STRENGTH = 3;
-const int FOX_INITIATIVE = 7;
-const char FOX_SYMBOL = 'F';
-
 #pragma region Private methods
 std::string Fox::toString() const {
 	return "Fox";
@@ -24,7 +20,7 @@ bool Fox::encounteredStrongerOrganism() {
 
 #pragma region Public methods
 Fox::Fox(int x, int y, World* world)
-	: Animal(FOX_STRENGTH, FOX_INITIATIVE, FOX_SYMBOL, x, y, world) {}
+	: Animal(Strength, Initiative, Symbol, x, y, world) {}
 
 void Fox::action() {
 	Position position = getPosition();

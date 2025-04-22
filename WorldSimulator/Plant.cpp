@@ -1,7 +1,5 @@
 #include "Plant.h"
 
-const int Plant::SowingProbability = 10;
-
 #pragma region Private methods
 void Plant::sow() {
 	bool canReproduce = (rand() % 100) < SowingProbability;

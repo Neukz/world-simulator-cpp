@@ -1,9 +1,6 @@
 #include "SosnowskysHogweed.h"
 #include "Animal.h"
 
-const int SOSNOWSKYS_HOGWEED_STRENGTH = 10;
-const char SOSNOWSKYS_HOGWEED_SYMBOL = 'h';
-
 #pragma region Private methods
 std::string SosnowskysHogweed::toString() const {
 	return "Sosnowsky's Hogweed";
@@ -27,7 +24,7 @@ void SosnowskysHogweed::killNeighboringAnimals() {
 
 #pragma region Public methods
 SosnowskysHogweed::SosnowskysHogweed(int x, int y, World* world)
-	: Plant(SOSNOWSKYS_HOGWEED_STRENGTH, SOSNOWSKYS_HOGWEED_SYMBOL, x, y, world) {}
+	: Plant(Strength, Symbol, x, y, world) {}
 
 void SosnowskysHogweed::action() {
 	killNeighboringAnimals();

@@ -1,4 +1,5 @@
 ﻿#include "World.h"
+#include <Windows.h>
 #include <sstream>
 #include "Animal.h"
 #include "Human.h"
@@ -62,7 +63,7 @@ void World::announceEvents() {
 #pragma region Public methods
 World::World(int width, int height)
 	: width(width), height(height) {
-	std::setlocale(LC_ALL, "en_US.UTF-8");	// Support unicode characters
+	SetConsoleOutputCP(CP_UTF8);	// Support unicode characters
 	srand(time(nullptr));
 }
 
