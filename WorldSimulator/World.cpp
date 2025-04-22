@@ -1,6 +1,7 @@
 ﻿#include "World.h"
 #include <sstream>
 #include "Animal.h"
+#include "Human.h"
 #include "Plant.h"
 
 #pragma region Private methods
@@ -80,16 +81,17 @@ void World::makeTurn() {
 		}
 
 		organism->mature();
+
+		if (dynamic_cast<Human*>(organism)) {
+			std::cout << "Human's turn..." << std::endl;
+		}
 		organism->action();
 
 		// If it's an Animal, check for collision
 		if (dynamic_cast<Animal*>(organism)) {
-			Organism* other = getCollidingOrganism(organism);
-			if (other == nullptr) {
-				continue;
+			if (Organism* other = getCollidingOrganism(organism)) {
+				other->collision(organism);
 			}
-
-			other->collision(organism);
 		}
 	}
 

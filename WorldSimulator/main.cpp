@@ -1,4 +1,5 @@
 #include <conio.h>
+#include "Human.h"
 #include "World.h"
 #include "Wolf.h"
 #include "Sheep.h"
@@ -15,6 +16,7 @@ int main() {
 	World* world = new World(20, 10);
 	world->populate({
 		// Animals
+		new Human(10, 8, world),
 		new Wolf(13, 3, world),
 		new Wolf(18, 2, world),
 		new Sheep(8, 2, world),

@@ -17,6 +17,10 @@ std::string Human::toString() const {
 	return "Human";
 }
 
+Organism* Human::createNewInstance(int x, int y) {
+	return new Human(x, y, world);
+}
+
 void Human::move(Direction direction) {
 	int dx = 0, dy = 0;
 	switch (direction) {
