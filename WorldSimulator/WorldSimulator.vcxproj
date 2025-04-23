@@ -149,7 +149,6 @@
     <ClInclude Include="Animal.h" />
     <ClInclude Include="Antelope.h" />
     <ClInclude Include="Belladonna.h" />
-    <ClInclude Include="Direction.h" />
     <ClInclude Include="Fox.h" />
     <ClInclude Include="Grass.h" />
     <ClInclude Include="Guarana.h" />

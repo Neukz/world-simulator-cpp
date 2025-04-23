@@ -12,7 +12,7 @@ Organism* Antelope::createNewInstance(int x, int y) {
 void Antelope::escape() {
 	Position position = getPosition();
 	do {
-		Position randomNeighbor = position.getRandomNeighbor(1);
+		Position randomNeighbor = position.getRandomNeighbor();
 		setPosition(randomNeighbor);
 	} while (position == getPosition() || world->getCollidingOrganism(this) != nullptr);
 	setPrevPosition(position);

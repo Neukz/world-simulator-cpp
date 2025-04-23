@@ -12,8 +12,8 @@ public:
 
 	Position(int x, int y);
 
-	std::vector<Position> getNeighbors() const;
-	Position getRandomNeighbor(int range) const;
+	std::vector<Position> getNeighbors(int range = 1) const;
+	Position getRandomNeighbor(int range = 1) const;
 
 	int getX() const;
 	int getY() const;

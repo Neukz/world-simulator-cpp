@@ -2,7 +2,7 @@
 
 #pragma region Private methods
 void Animal::breed(Organism* other) {
-	// Go back to previous position
+	// Revert other's move and reproduce
 	Position otherPrevPosition = other->getPrevPosition();
 	other->setPosition(otherPrevPosition);
 	reproduce();
@@ -16,17 +16,19 @@ Animal::Animal(int strength, int initiative, char symbol, int x, int y, World* w
 void Animal::action() {
 	Position position = getPosition();
 	do {
-		Position randomNeighbor = position.getRandomNeighbor(1);
+		Position randomNeighbor = position.getRandomNeighbor();
 		setPosition(randomNeighbor);
-	} while (position == getPosition());
+	} while (position == getPosition());	// Repeat until a valid new position is set
 	setPrevPosition(position);
 }
 
 void Animal::collision(Organism* other) {
+	// If there's an organism of the same type, breed
 	if (typeid(*this) == typeid(*other)) {
 		return breed(other);
 	}
 
+	// Fight
 	if (this->getStrength() > other->getStrength()) {
 		other->kill(this);
 	} else {

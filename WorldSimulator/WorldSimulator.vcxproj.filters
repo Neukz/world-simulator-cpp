@@ -95,9 +95,6 @@
     <ClInclude Include="Antelope.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Direction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Human.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -1,5 +1,4 @@
 #include "Position.h"
-#include "Direction.h"
 
 const Position Position::InvalidPosition = Position(-1, -1);
 
@@ -7,29 +6,20 @@ const Position Position::InvalidPosition = Position(-1, -1);
 Position::Position(int x, int y)
 	: x(x), y(y) {}
 
-std::vector<Position> Position::getNeighbors() const {
+std::vector<Position> Position::getNeighbors(int range) const {
 	std::vector<Position> neighbors = {
-		Position(x, y - 1),
-		Position(x, y + 1),
-		Position(x - 1, y),
-		Position(x + 1, y)
+		Position(x, y - range),
+		Position(x, y + range),
+		Position(x - range, y),
+		Position(x + range, y)
 	};
 	return neighbors;
 }
 
 Position Position::getRandomNeighbor(int range) const {
-	// Select random direction and shift position by range
-	Direction direction = static_cast<Direction>(rand() % 4);
-	switch (direction) {
-		case Direction::Up:
-			return Position(x, y - range);
-		case Direction::Down:
-			return Position(x, y + range);
-		case Direction::Left:
-			return Position(x - range, y);
-		case Direction::Right:
-			return Position(x + range, y);
-	}
+	std::vector<Position> neighbors = getNeighbors(range);
+	Position randomNeighbor = neighbors[rand() % neighbors.size()];
+	return randomNeighbor;
 }
 
 int Position::getX() const {

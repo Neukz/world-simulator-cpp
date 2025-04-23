@@ -41,7 +41,7 @@ int main() {
 		while (true) {
 			if (_kbhit()) {
 				char key = _getch();
-				if (key == '\\') {
+				if (key == 'n') {
 					world->makeTurn();
 					world->drawWorld();
 				}
