@@ -1,12 +1,17 @@
 #include "Antelope.h"
+#include "OrganismFactory.h"
+
+bool Antelope::registered = [] {
+	OrganismFactory::getInstance().registerType("Antelope",
+		[](int x, int y, World* world) {
+		return new Antelope(x, y, world);
+	});
+	return true;
+}();
 
 #pragma region Private methods
 std::string Antelope::toString() const {
 	return "Antelope";
-}
-
-Organism* Antelope::createNewInstance(int x, int y) {
-	return new Antelope(x, y, world);
 }
 
 void Antelope::escape() {

@@ -1,12 +1,17 @@
 #include "Sheep.h"
+#include "OrganismFactory.h"
+
+bool Sheep::registered = [] {
+	OrganismFactory::getInstance().registerType("Sheep",
+		[](int x, int y, World* world) {
+		return new Sheep(x, y, world);
+	});
+	return true;
+}();
 
 #pragma region Private methods
 std::string Sheep::toString() const {
 	return "Sheep";
-}
-
-Organism* Sheep::createNewInstance(int x, int y) {
-	return new Sheep(x, y, world);
 }
 #pragma endregion
 

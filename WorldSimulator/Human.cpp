@@ -1,6 +1,15 @@
 #include "Human.h"
 #include "conio.h"
 #include <string>
+#include "OrganismFactory.h"
+
+bool Human::registered = [] {
+	OrganismFactory::getInstance().registerType("Human",
+		[](int x, int y, World* world) {
+		return new Human(x, y, world);
+	});
+	return true;
+}();
 
 const std::unordered_map<int, Human::Direction> Human::KeyToDirection = {
 	{72, Direction::Up},
@@ -12,10 +21,6 @@ const std::unordered_map<int, Human::Direction> Human::KeyToDirection = {
 #pragma region Private methods
 std::string Human::toString() const {
 	return "Human";
-}
-
-Organism* Human::createNewInstance(int x, int y) {
-	return new Human(x, y, world);
 }
 
 bool Human::canUseMagicalPotion() const {
@@ -106,5 +111,13 @@ std::string Human::serialize() const {
 		+ ',' + std::to_string(magicalPotionCooldown);
 
 	return serialized;
+}
+
+void Human::setMagicalPotionActive(bool active) {
+	magicalPotionActive = active;
+}
+
+void Human::setMagicalPotionCooldown(int cooldown) {
+	magicalPotionCooldown = cooldown;
 }
 #pragma endregion

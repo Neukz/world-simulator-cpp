@@ -32,6 +32,7 @@ public:
 	void reportDeath(Organism* winner, Organism* loser);
 	void addOrganism(Organism* organism);
 	void saveWorld();
+	void loadWorld();
 	bool positionWithinBounds(const Position& position) const;
 	Organism* getOrganismAt(const Position& position) const;
 	Organism* getCollidingOrganism(Organism* organism) const;

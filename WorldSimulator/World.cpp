@@ -5,6 +5,7 @@
 #include "Animal.h"
 #include "Human.h"
 #include "Plant.h"
+#include "OrganismFactory.h"
 
 const std::string World::SaveFilename = "save.txt";
 
@@ -134,7 +135,7 @@ void World::populate(std::initializer_list<Organism*> organisms) {
 }
 
 void World::reportDeath(Organism* winner, Organism* loser) {
-	// If the loser was a Plant, that means it was eaten
+	// If loser was a Plant, that means it was eaten
 	std::string reason = dynamic_cast<Plant*>(loser) ? "eaten" : "killed";
 
 	std::ostringstream info;
@@ -165,6 +166,56 @@ void World::saveWorld() {
 		}
 		saveFile.close();
 		std::cout << "World saved!" << std::endl;
+	} else {
+		std::cout << "Failed to create/write to: " << SaveFilename << "." << std::endl;
+	}
+}
+
+void World::loadWorld() {
+	std::ifstream saveFile(SaveFilename);
+	std::string serializedOrganism;
+	if (saveFile.is_open()) {
+		organisms.clear();
+
+		while (std::getline(saveFile, serializedOrganism)) {
+			// Extract values
+			std::stringstream fieldStream(serializedOrganism);
+			std::string field;
+			std::vector<std::string> fields;
+			while (std::getline(fieldStream, field, ',')) {
+				fields.push_back(field);
+			}
+
+			// Convert to appropriate types
+			std::string type = fields[0];
+			int age = std::stoi(fields[1]);
+			int strength = std::stoi(fields[2]);
+			int x = std::stoi(fields[3]);
+			int y = std::stoi(fields[4]);
+			int prevX = std::stoi(fields[5]);
+			int prevY = std::stoi(fields[6]);
+			
+			// Create the organism and restore its properties
+			Organism* organism = OrganismFactory::getInstance().create(type, x, y, this);
+			organism->setAge(age);
+			organism->setStrength(strength);
+			organism->setPrevPosition(Position(prevX, prevY));
+
+			// Restore Human-specific fields
+			if (Human* human = dynamic_cast<Human*>(organism)) {
+				bool magicalPotionActive = fields[7] == "1";
+				int magicalPotionCooldown = std::stoi(fields[8]);
+				human->setMagicalPotionActive(magicalPotionActive);
+				human->setMagicalPotionCooldown(magicalPotionCooldown);
+			}
+
+			addOrganism(organism);
+		}
+
+		saveFile.close();
+		std::cout << "World loaded from save!" << std::endl;
+	} else {
+		std::cout << "Failed to open/read from: " << SaveFilename << "." << std::endl;
 	}
 }
 

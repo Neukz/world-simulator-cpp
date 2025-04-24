@@ -1,12 +1,17 @@
 #include "Guarana.h"
+#include "OrganismFactory.h"
+
+bool Guarana::registered = [] {
+	OrganismFactory::getInstance().registerType("Guarana",
+		[](int x, int y, World* world) {
+		return new Guarana(x, y, world);
+	});
+	return true;
+}();
 
 #pragma region Private methods
 std::string Guarana::toString() const {
 	return "Guarana";
-}
-
-Organism* Guarana::createNewInstance(int x, int y) {
-	return new Guarana(x, y, world);
 }
 
 void Guarana::boostEater(Organism* eater) {

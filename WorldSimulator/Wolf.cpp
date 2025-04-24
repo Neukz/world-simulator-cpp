@@ -1,12 +1,17 @@
 #include "Wolf.h"
+#include "OrganismFactory.h"
+
+bool Wolf::registered = [] {
+	OrganismFactory::getInstance().registerType("Wolf",
+		[](int x, int y, World* world) {
+		return new Wolf(x, y, world);
+	});
+	return true;
+}();
 
 #pragma region Private methods
 std::string Wolf::toString() const {
 	return "Wolf";
-}
-
-Organism* Wolf::createNewInstance(int x, int y) {
-	return new Wolf(x, y, world);
 }
 #pragma endregion
 

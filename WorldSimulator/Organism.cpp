@@ -1,16 +1,18 @@
 #include "Organism.h"
 #include <string>
+#include "OrganismFactory.h"
 
 #pragma region Protected methods
 void Organism::reproduce() {
-	Position position = getPosition();
 	Position childPosition = world->getRandomFreeNeighboringField(this);
 	if (childPosition == Position::InvalidPosition) {
 		return;	// No space to reproduce
 	}
+
+	std::string type = identify();
 	int childX = childPosition.getX();
 	int childY = childPosition.getY();
-	Organism* child = createNewInstance(childX, childY);
+	Organism* child = OrganismFactory::getInstance().create(type, childX, childY, world);
 	world->addOrganism(child);
 }
 #pragma endregion
@@ -37,7 +39,6 @@ std::string Organism::serialize() const {
 	std::vector<std::string> fields = {
 		toString(),
 		std::to_string(age),
-		std::to_string(alive),	// "0" or "1"
 		std::to_string(strength),
 		std::to_string(position.getX()),
 		std::to_string(position.getY()),
@@ -64,6 +65,10 @@ std::string Organism::identify() const {
 
 void Organism::mature() {
 	age++;
+}
+
+void Organism::setAge(int age) {
+	this->age = age;
 }
 
 void Organism::kill(Organism* killer) {

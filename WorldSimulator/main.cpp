@@ -48,6 +48,10 @@ int main() {
 						break;
 					case 's':
 						world->saveWorld();
+						break;
+					case 'l':
+						world->loadWorld();
+						world->drawWorld();
 				}
 			}
 		}

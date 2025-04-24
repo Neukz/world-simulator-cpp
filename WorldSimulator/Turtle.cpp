@@ -1,12 +1,17 @@
 #include "Turtle.h"
+#include "OrganismFactory.h"
+
+bool Turtle::registered = [] {
+	OrganismFactory::getInstance().registerType("Turtle",
+		[](int x, int y, World* world) {
+		return new Turtle(x, y, world);
+	});
+	return true;
+}();
 
 #pragma region Private methods
 std::string Turtle::toString() const {
 	return "Turtle";
-}
-
-Organism* Turtle::createNewInstance(int x, int y) {
-	return new Turtle(x, y, world);
 }
 
 void Turtle::deflectAttack(Organism* attacker) const {

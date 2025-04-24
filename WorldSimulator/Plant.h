@@ -7,7 +7,6 @@ private:
 	static const int SowingProbability = 10;
 
 	virtual std::string toString() const = 0;
-	virtual Organism* createNewInstance(int x, int y) = 0;
 	void sow();
 
 public:

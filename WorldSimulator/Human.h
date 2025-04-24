@@ -18,11 +18,12 @@ private:
 	static const std::unordered_map<int, Direction> KeyToDirection;
 	static const char MagicalPotionKey = ' ';
 
+	static bool registered;
+
 	bool magicalPotionActive = false;
 	int magicalPotionCooldown = 0;
 
 	std::string toString() const override;
-	Organism* createNewInstance(int x, int y) override;
 	bool canUseMagicalPotion() const;
 	void useMagicalPotion();
 	void updateMagicalPotion();
@@ -32,4 +33,7 @@ public:
 
 	void action() override;
 	std::string serialize() const override;
+
+	void setMagicalPotionActive(bool active);
+	void setMagicalPotionCooldown(int cooldown);
 };

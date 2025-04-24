@@ -1,12 +1,17 @@
 #include "Fox.h"
+#include "OrganismFactory.h"
+
+bool Fox::registered = [] {
+	OrganismFactory::getInstance().registerType("Fox",
+		[](int x, int y, World* world) {
+		return new Fox(x, y, world);
+	});
+	return true;
+}();
 
 #pragma region Private methods
 std::string Fox::toString() const {
 	return "Fox";
-}
-
-Organism* Fox::createNewInstance(int x, int y) {
-	return new Fox(x, y, world);
 }
 
 bool Fox::encounteredStrongerOrganism() {

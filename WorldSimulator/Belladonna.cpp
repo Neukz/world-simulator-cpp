@@ -1,12 +1,17 @@
 #include "Belladonna.h"
+#include "OrganismFactory.h"
+
+bool Belladonna::registered = [] {
+	OrganismFactory::getInstance().registerType("Belladonna",
+		[](int x, int y, World* world) {
+		return new Belladonna(x, y, world);
+	});
+	return true;
+}();
 
 #pragma region Private methods
 std::string Belladonna::toString() const {
 	return "Belladonna";
-}
-
-Organism* Belladonna::createNewInstance(int x, int y) {
-	return new Belladonna(x, y, world);
 }
 #pragma endregion
 

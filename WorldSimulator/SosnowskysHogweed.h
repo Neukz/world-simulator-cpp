@@ -6,8 +6,9 @@ private:
 	static const int Strength = 10;
 	static const char Symbol = 'h';
 
+	static bool registered;
+
 	std::string toString() const override;
-	Organism* createNewInstance(int x, int y) override;
 	void killNeighboringAnimals();
 
 public:

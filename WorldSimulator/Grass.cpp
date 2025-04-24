@@ -1,12 +1,17 @@
 #include "Grass.h"
+#include "OrganismFactory.h"
+
+bool Grass::registered = [] {
+	OrganismFactory::getInstance().registerType("Grass",
+		[](int x, int y, World* world) {
+		return new Grass(x, y, world);
+	});
+	return true;
+}();
 
 #pragma region Private methods
 std::string Grass::toString() const {
 	return "Grass";
-}
-
-Organism* Grass::createNewInstance(int x, int y) {
-	return new Grass(x, y, world);
 }
 #pragma endregion
 

@@ -16,7 +16,6 @@ private:
 	Position prevPosition;
 
 	virtual std::string toString() const = 0;
-	virtual Organism* createNewInstance(int x, int y) = 0;
 
 protected:
 	World* world;
@@ -38,6 +37,7 @@ public:
 
 	void mature();
 	void kill(Organism* killer);
+	void setAge(int age);
 	void setStrength(int strength);
 	void setPosition(const Position& newPosition);
 	void setPrevPosition(const Position& newPosition);

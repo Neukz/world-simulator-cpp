@@ -1,12 +1,17 @@
 #include "SowThistle.h"
+#include "OrganismFactory.h"
+
+bool SowThistle::registered = [] {
+	OrganismFactory::getInstance().registerType("Sow Thistle",
+		[](int x, int y, World* world) {
+		return new SowThistle(x, y, world);
+	});
+	return true;
+}();
 
 #pragma region Private methods
 std::string SowThistle::toString() const {
 	return "Sow Thistle";
-}
-
-Organism* SowThistle::createNewInstance(int x, int y) {
-	return new SowThistle(x, y, world);
 }
 #pragma endregion
 

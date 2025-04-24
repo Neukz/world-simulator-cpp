@@ -6,8 +6,9 @@ private:
 	static const int Strength = 99;
 	static const char Symbol = 'b';
 
+	static bool registered;
+
 	std::string toString() const override;
-	Organism* createNewInstance(int x, int y) override;
 
 public:
 	Belladonna(int x, int y, World* world);

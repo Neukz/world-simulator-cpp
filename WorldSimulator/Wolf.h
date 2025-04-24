@@ -7,8 +7,9 @@ private:
 	static const int Initiative = 5;
 	static const char Symbol = 'W';
 
+	static bool registered;
+
 	std::string toString() const override;
-	Organism* createNewInstance(int x, int y) override;
 
 public:
 	Wolf(int x, int y, World* world);

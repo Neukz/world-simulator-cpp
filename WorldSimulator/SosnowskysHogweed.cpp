@@ -1,13 +1,18 @@
 #include "SosnowskysHogweed.h"
 #include "Animal.h"
+#include "OrganismFactory.h"
+
+bool SosnowskysHogweed::registered = [] {
+	OrganismFactory::getInstance().registerType("Sosnowsky's Hogweed",
+		[](int x, int y, World* world) {
+		return new SosnowskysHogweed(x, y, world);
+	});
+	return true;
+}();
 
 #pragma region Private methods
 std::string SosnowskysHogweed::toString() const {
 	return "Sosnowsky's Hogweed";
-}
-
-Organism* SosnowskysHogweed::createNewInstance(int x, int y) {
-	return new SosnowskysHogweed(x, y, world);
 }
 
 void SosnowskysHogweed::killNeighboringAnimals() {

@@ -7,8 +7,9 @@ private:
 	static const int Initiative = 1;
 	static const char Symbol = 'T';
 
+	static bool registered;
+
 	std::string toString() const override;
-	Organism* createNewInstance(int x, int y) override;
 	void deflectAttack(Organism* attacker) const;
 
 public:
