@@ -1,5 +1,6 @@
 #include "Human.h"
 #include "conio.h"
+#include <string>
 
 const std::unordered_map<int, Human::Direction> Human::KeyToDirection = {
 	{72, Direction::Up},
@@ -97,9 +98,13 @@ void Human::action() {
 	setPrevPosition(position);
 }
 
-void Human::collision(Organism* other) {
-	if (magicalPotionActive) {
+std::string Human::serialize() const {
+	// Grab all Organism fields and add Human-specific properties
+	std::string serialized = Organism::serialize();
+	serialized +=
+		',' + std::to_string(magicalPotionActive)	// "0" or "1"
+		+ ',' + std::to_string(magicalPotionCooldown);
 
-	}
+	return serialized;
 }
 #pragma endregion

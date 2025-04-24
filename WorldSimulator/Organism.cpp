@@ -1,4 +1,5 @@
 #include "Organism.h"
+#include <string>
 
 #pragma region Protected methods
 void Organism::reproduce() {
@@ -29,6 +30,28 @@ bool Organism::compareByInitiativeAndAge(Organism* organism1, Organism* organism
 		return organism1->getAge() > organism2->getAge();	// If initiative is the same, older is higher priority
 	}
 	return initiative1 > initiative2;	// Higher initiative is higher priority
+}
+
+std::string Organism::serialize() const {
+	// Convert fields to strings
+	std::vector<std::string> fields = {
+		toString(),
+		std::to_string(age),
+		std::to_string(alive),	// "0" or "1"
+		std::to_string(strength),
+		std::to_string(position.getX()),
+		std::to_string(position.getY()),
+		std::to_string(prevPosition.getX()),
+		std::to_string(prevPosition.getY()),
+	};
+
+	// Join
+	std::string serialized = fields[0];
+	for (int i = 1; i < fields.size(); i++) {
+		serialized += ',' + fields[i];
+	}
+
+	return serialized;
 }
 
 void Organism::draw() const {

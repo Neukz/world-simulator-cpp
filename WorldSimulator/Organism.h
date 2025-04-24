@@ -26,11 +26,12 @@ protected:
 public:
 	Organism(int strength, int initiative, char symbol, int x, int y, World* world);
 
-	virtual void action() = 0;
-	virtual void collision(Organism* other) = 0;
-
 	static bool compareByPosition(Organism* organism1, Organism* organism2);
 	static bool compareByInitiativeAndAge(Organism* organism1, Organism* organism2);
+
+	virtual void action() = 0;
+	virtual void collision(Organism* other) = 0;
+	virtual std::string serialize() const;
 
 	void draw() const;
 	std::string identify() const;

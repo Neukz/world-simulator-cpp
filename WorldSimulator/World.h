@@ -8,6 +8,8 @@ class Organism;
 
 class World {
 private:
+	static const std::string SaveFilename;
+
 	int width;
 	int height;
 	std::list<Organism*> organisms;
@@ -29,6 +31,7 @@ public:
 	void populate(std::initializer_list<Organism*> organisms);
 	void reportDeath(Organism* winner, Organism* loser);
 	void addOrganism(Organism* organism);
+	void saveWorld();
 	bool positionWithinBounds(const Position& position) const;
 	Organism* getOrganismAt(const Position& position) const;
 	Organism* getCollidingOrganism(Organism* organism) const;

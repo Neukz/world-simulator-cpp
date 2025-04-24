@@ -1,9 +1,12 @@
 ﻿#include "World.h"
 #include <Windows.h>
 #include <sstream>
+#include <fstream>
 #include "Animal.h"
 #include "Human.h"
 #include "Plant.h"
+
+const std::string World::SaveFilename = "save.txt";
 
 #pragma region Private methods
 void World::eraseWorld() const {
@@ -152,6 +155,17 @@ void World::reportDeath(Organism* winner, Organism* loser) {
 void World::addOrganism(Organism* organism) {
 	organisms.push_back(organism);
 	reportSpawn(organism);
+}
+
+void World::saveWorld() {
+	std::ofstream saveFile(SaveFilename);
+	if (saveFile.is_open()) {
+		for (Organism* organism : organisms) {
+			saveFile << organism->serialize() << std::endl;
+		}
+		saveFile.close();
+		std::cout << "World saved!" << std::endl;
+	}
 }
 
 bool World::positionWithinBounds(const Position& position) const {

@@ -41,9 +41,13 @@ int main() {
 		while (true) {
 			if (_kbhit()) {
 				char key = _getch();
-				if (key == 'n') {
-					world->makeTurn();
-					world->drawWorld();
+				switch (key) {
+					case 'n':
+						world->makeTurn();
+						world->drawWorld();
+						break;
+					case 's':
+						world->saveWorld();
 				}
 			}
 		}
