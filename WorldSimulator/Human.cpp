@@ -3,14 +3,6 @@
 #include <string>
 #include "OrganismFactory.h"
 
-bool Human::registered = [] {
-	OrganismFactory::getInstance().registerType("Human",
-		[](int x, int y, World* world) {
-		return new Human(x, y, world);
-	});
-	return true;
-}();
-
 const std::unordered_map<int, Human::Direction> Human::KeyToDirection = {
 	{72, Direction::Up},
 	{80, Direction::Down},
@@ -18,7 +10,20 @@ const std::unordered_map<int, Human::Direction> Human::KeyToDirection = {
 	{77, Direction::Right}
 };
 
+bool Human::registered = [] {
+	OrganismFactory::getInstance().registerType("Human",
+		[](int x, int y, World* world) {
+		return Human::spawn(x, y, world);
+	});
+	return true;
+}();
+
+Human* Human::instance = nullptr;
+
 #pragma region Private methods
+Human::Human(int x, int y, World* world)
+	: Animal(Strength, Initiative, Symbol, x, y, world) {}
+
 std::string Human::toString() const {
 	return "Human";
 }
@@ -61,8 +66,22 @@ void Human::updateMagicalPotion() {
 #pragma endregion
 
 #pragma region Public methods
-Human::Human(int x, int y, World* world)
-	: Animal(Strength, Initiative, Symbol, x, y, world) {}
+Human* Human::spawn(int x, int y, World* world) {
+	if (instance) {
+		return nullptr;
+	}
+	instance = new Human(x, y, world);
+	return instance;
+}
+
+void Human::deleteInstance() {
+	delete instance;
+	instance = nullptr;
+}
+
+Human* Human::getInstance() {
+	return instance;
+}
 
 void Human::action() {
 	updateMagicalPotion();

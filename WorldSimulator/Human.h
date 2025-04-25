@@ -19,9 +19,15 @@ private:
 	static const char MagicalPotionKey = ' ';
 
 	static bool registered;
+	static Human* instance;
 
 	bool magicalPotionActive = false;
 	int magicalPotionCooldown = 0;
+
+	// Singleton pattern
+	Human(int x, int y, World* world);
+	Human(const Human&) = delete;
+	Human& operator=(const Human&) = delete;
 
 	std::string toString() const override;
 	bool canUseMagicalPotion() const;
@@ -29,7 +35,9 @@ private:
 	void updateMagicalPotion();
 
 public:
-	Human(int x, int y, World* world);
+	static Human* spawn(int x, int y, World* world);
+	static Human* getInstance();
+	static void deleteInstance();
 
 	void action() override;
 	std::string serialize() const override;

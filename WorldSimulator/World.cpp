@@ -37,10 +37,25 @@ void World::printAuthor() const {
 void World::removeDeadOrganisms() {
 	organisms.remove_if([](Organism* organism) {
 		if (!organism->isAlive()) {
-			delete organism;
+			if (dynamic_cast<Human*>(organism)) {
+				Human::deleteInstance();
+			} else {
+				delete organism;
+			}
 			return true;
 		}
 		return false;
+	});
+}
+
+void World::clearOrganisms() {
+	organisms.remove_if([](Organism* organism) {
+		if (dynamic_cast<Human*>(organism)) {
+			Human::deleteInstance();
+		} else {
+			delete organism;
+		}
+		return true;
 	});
 }
 
@@ -134,6 +149,22 @@ void World::populate(std::initializer_list<Organism*> organisms) {
 	}
 }
 
+void World::randomSeed() {
+	OrganismFactory& factory = OrganismFactory::getInstance();
+	std::vector<std::string> types = factory.getRegisteredTypes();
+
+	// Create 2 organisms of each type (except Human)
+	for (const std::string& type : types) {
+		for (int i = 0; i < 2; ++i) {
+			Position position = getRandomFreeField();
+			Organism* organism = factory.create(type, position.getX(), position.getY(), this);
+			if (organism != nullptr) {
+				addOrganism(organism);
+			}
+		}
+	}
+}
+
 void World::reportDeath(Organism* winner, Organism* loser) {
 	// If loser was a Plant, that means it was eaten
 	std::string reason = dynamic_cast<Plant*>(loser) ? "eaten" : "killed";
@@ -175,7 +206,7 @@ void World::loadWorld() {
 	std::ifstream saveFile(SaveFilename);
 	std::string serializedOrganism;
 	if (saveFile.is_open()) {
-		organisms.clear();
+		clearOrganisms();
 
 		while (std::getline(saveFile, serializedOrganism)) {
 			// Extract values
@@ -243,6 +274,18 @@ Organism* World::getCollidingOrganism(Organism* organism) const {
 	return other == organisms.end() ? nullptr : *other;
 }
 
+Position World::getRandomFreeField() const {
+	int x = rand() % width;
+	int y = rand() % height;
+	Position position(x, y);
+	while (getOrganismAt(position) != nullptr) {
+		x = rand() % width;
+		y = rand() % height;
+		position = Position(x, y);
+	}
+	return position;
+}
+
 Position World::getRandomFreeNeighboringField(Organism* organism) const {
 	Position position = organism->getPosition();
 	std::vector<Position> neighbors = position.getNeighbors();
@@ -266,8 +309,6 @@ int World::getHeight() const {
 }
 
 World::~World() {
-	for (Organism* organism : organisms) {
-		delete organism;
-	}
+	clearOrganisms();
 }
 #pragma endregion

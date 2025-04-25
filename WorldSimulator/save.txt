@@ -1,16 +1,44 @@
-Sheep,0,4,8,2,8,2
-Wolf,0,9,18,2,18,2
-Sheep,0,4,9,3,9,3
-Wolf,0,9,13,3,13,3
-Grass,0,0,9,5,9,5
-Sosnowsky's Hogweed,0,10,10,5,10,5
-Fox,0,3,11,5,11,5
-Fox,0,3,15,5,15,5
-Guarana,0,0,2,6,2,6
-Belladonna,0,99,7,6,7,6
-Turtle,0,2,12,7,12,7
-Turtle,0,2,14,7,14,7
-Antelope,0,4,2,8,2,8
-Sow Thistle,0,0,5,8,5,8
-Human,0,5,10,8,10,8,0,0
-Antelope,0,4,3,9,3,9
+Belladonna,4,99,3,0,3,0
+Belladonna,7,99,4,0,4,0
+Belladonna,2,99,5,0,5,0
+Belladonna,0,99,6,0,6,0
+Sosnowsky's Hogweed,4,10,12,0,12,0
+Sow Thistle,1,0,14,0,14,0
+Sow Thistle,8,0,15,0,15,0
+Sow Thistle,0,0,16,0,16,0
+Belladonna,8,99,4,1,4,1
+Grass,8,0,5,1,5,1
+Turtle,8,5,7,1,7,2
+Sosnowsky's Hogweed,0,10,11,1,11,1
+Sosnowsky's Hogweed,8,10,12,1,12,1
+Sosnowsky's Hogweed,1,10,13,1,13,1
+Sow Thistle,2,0,14,1,14,1
+Sow Thistle,7,0,15,1,15,1
+Guarana,8,0,16,1,16,1
+Guarana,2,0,17,1,17,1
+Grass,2,0,5,2,5,2
+Sow Thistle,0,0,13,2,13,2
+Sow Thistle,1,0,14,2,14,2
+Sow Thistle,6,0,15,2,15,2
+Guarana,1,0,16,2,16,2
+Turtle,8,2,1,3,1,2
+Sow Thistle,1,0,14,3,14,3
+Sow Thistle,5,0,15,3,15,3
+Sosnowsky's Hogweed,8,10,16,3,16,3
+Human,8,6,19,3,19,2,1,5
+Antelope,8,4,19,4,19,6
+Wolf,8,9,0,5,0,6
+Wolf,8,9,14,5,14,4
+Sow Thistle,1,0,6,6,6,6
+Sow Thistle,1,0,7,6,7,6
+Sow Thistle,1,0,5,7,5,7
+Sow Thistle,8,0,6,7,6,7
+Sow Thistle,6,0,7,7,7,7
+Sow Thistle,2,0,5,8,5,8
+Sow Thistle,5,0,6,8,6,8
+Sow Thistle,2,0,7,8,7,8
+Sow Thistle,0,0,8,8,8,8
+Grass,8,0,10,8,10,8
+Sow Thistle,2,0,5,9,5,9
+Sow Thistle,3,0,6,9,6,9
+Sow Thistle,1,0,7,9,7,9

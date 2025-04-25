@@ -20,4 +20,6 @@ public:
 
     void registerType(const std::string& name, Creator creator);
     Organism* create(const std::string& name, int x, int y, World* world) const;
+
+    std::vector<std::string> getRegisteredTypes() const;
 };

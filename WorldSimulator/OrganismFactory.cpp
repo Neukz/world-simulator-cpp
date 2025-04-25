@@ -17,4 +17,13 @@ Organism* OrganismFactory::create(const std::string& name, int x, int y, World* 
     }
     return nullptr;
 }
+
+std::vector<std::string> OrganismFactory::getRegisteredTypes() const {
+    std::vector<std::string> types;
+    for (const auto& creator : creators) {
+        types.push_back(creator.first);
+    }
+    return types;
+}
+
 #pragma endregion

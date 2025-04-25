@@ -20,6 +20,7 @@ private:
 	void printBottomBorder() const;
 	void printAuthor() const;
 	void removeDeadOrganisms();
+	void clearOrganisms();
 	void reportSpawn(Organism* organism);
 	void announceEvents();
 
@@ -29,6 +30,7 @@ public:
 	void makeTurn();
 	void drawWorld();
 	void populate(std::initializer_list<Organism*> organisms);
+	void randomSeed();
 	void reportDeath(Organism* winner, Organism* loser);
 	void addOrganism(Organism* organism);
 	void saveWorld();
@@ -36,6 +38,7 @@ public:
 	bool positionWithinBounds(const Position& position) const;
 	Organism* getOrganismAt(const Position& position) const;
 	Organism* getCollidingOrganism(Organism* organism) const;
+	Position getRandomFreeField() const;
 	Position getRandomFreeNeighboringField(Organism* organism) const;
 
 	int getWidth() const;
