@@ -5,7 +5,7 @@ class Antelope : public Animal {
 private:
 	static const int Strength = 4;
 	static const int Initiative = 4;
-	static const char Symbol = 'A';
+	static const std::string Symbol;
 
 	static bool registered;
 

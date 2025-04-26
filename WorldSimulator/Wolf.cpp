@@ -1,5 +1,7 @@
-#include "Wolf.h"
+﻿#include "Wolf.h"
 #include "OrganismFactory.h"
+
+const std::string Wolf::Symbol = u8"🐺";
 
 bool Wolf::registered = [] {
 	OrganismFactory::getInstance().registerType("Wolf",

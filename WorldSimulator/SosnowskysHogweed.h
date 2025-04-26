@@ -4,7 +4,7 @@
 class SosnowskysHogweed : public Plant {
 private:
 	static const int Strength = 10;
-	static const char Symbol = 'h';
+	static const std::string Symbol;
 
 	static bool registered;
 

@@ -1,5 +1,7 @@
-#include "Belladonna.h"
+﻿#include "Belladonna.h"
 #include "OrganismFactory.h"
+
+const std::string Belladonna::Symbol = u8"🫐";
 
 bool Belladonna::registered = [] {
 	OrganismFactory::getInstance().registerType("Belladonna",

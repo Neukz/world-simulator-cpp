@@ -4,7 +4,7 @@
 class Grass : public Plant {
 private:
 	static const int Strength = 0;
-	static const char Symbol = 'g';
+	static const std::string Symbol;
 
 	static bool registered;
 

@@ -5,7 +5,7 @@ class Turtle : public Animal {
 private:
 	static const int Strength = 2;
 	static const int Initiative = 1;
-	static const char Symbol = 'T';
+	static const std::string Symbol;
 
 	static bool registered;
 

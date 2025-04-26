@@ -1,5 +1,7 @@
-#include "Sheep.h"
+﻿#include "Sheep.h"
 #include "OrganismFactory.h"
+
+const std::string Sheep::Symbol = u8"🐑";
 
 bool Sheep::registered = [] {
 	OrganismFactory::getInstance().registerType("Sheep",

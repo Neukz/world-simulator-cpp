@@ -10,7 +10,7 @@ void Plant::sow() {
 #pragma endregion
 
 #pragma region Public methods
-Plant::Plant(int strength, char symbol, int x, int y, World* world)
+Plant::Plant(int strength, std::string symbol, int x, int y, World* world)
 	: Organism(strength, 0, symbol, x, y, world) {}
 
 void Plant::action() {

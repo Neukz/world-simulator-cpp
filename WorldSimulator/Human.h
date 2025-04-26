@@ -13,7 +13,7 @@ private:
 
 	static const int Strength = 5;
 	static const int Initiative = 4;
-	static const char Symbol = 'H';
+	static const std::string Symbol;
 	// Map of arrow keys to Direction
 	static const std::unordered_map<int, Direction> KeyToDirection;
 	static const char MagicalPotionKey = ' ';

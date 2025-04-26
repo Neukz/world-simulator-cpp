@@ -4,7 +4,7 @@
 class Belladonna : public Plant {
 private:
 	static const int Strength = 99;
-	static const char Symbol = 'b';
+	static const std::string Symbol;
 
 	static bool registered;
 

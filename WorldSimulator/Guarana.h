@@ -4,7 +4,7 @@
 class Guarana : public Plant {
 private:
 	static const int Strength = 0;
-	static const char Symbol = 'u';
+	static const std::string Symbol;
 
 	static bool registered;
 

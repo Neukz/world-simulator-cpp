@@ -1,5 +1,7 @@
-#include "Guarana.h"
+﻿#include "Guarana.h"
 #include "OrganismFactory.h"
+
+const std::string Guarana::Symbol = u8"🍒";
 
 bool Guarana::registered = [] {
 	OrganismFactory::getInstance().registerType("Guarana",

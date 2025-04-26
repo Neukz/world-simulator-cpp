@@ -1,5 +1,4 @@
 #include "Organism.h"
-#include <string>
 #include "OrganismFactory.h"
 
 #pragma region Protected methods
@@ -18,7 +17,7 @@ void Organism::reproduce() {
 #pragma endregion
 
 #pragma region Public methods
-Organism::Organism(int strength, int initiative, char symbol, int x, int y, World* world)
+Organism::Organism(int strength, int initiative, std::string symbol, int x, int y, World* world)
 	: strength(strength), initiative(initiative), symbol(symbol), position(x, y), prevPosition(x, y), world(world) {}
 
 bool Organism::compareByPosition(Organism* organism1, Organism* organism2) {

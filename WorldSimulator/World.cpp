@@ -17,7 +17,7 @@ void World::eraseWorld() const {
 void World::printTopBorder() const {
 	std::cout << u8"╔";
 	for (int i = 0; i < width; i++) {
-		std::cout << u8"═";
+		std::cout << u8"══";
 	}
 	std::cout << u8"╗" << std::endl;
 }
@@ -25,7 +25,7 @@ void World::printTopBorder() const {
 void World::printBottomBorder() const {
 	std::cout << u8"╚";
 	for (int i = 0; i < width; i++) {
-		std::cout << u8"═";
+		std::cout << u8"══";
 	}
 	std::cout << u8"╝" << std::endl;
 }
@@ -119,8 +119,8 @@ void World::makeTurn() {
 }
 
 void World::drawWorld() {
-	//eraseWorld();
-	//printAuthor();
+	eraseWorld();
+	printAuthor();
 	printTopBorder();
 
 	// Sort organisms by position an draw them
@@ -133,7 +133,7 @@ void World::drawWorld() {
 				(*organism)->draw();
 				organism++;
 			} else {
-				std::cout << ' ';	// Unoccupied cell
+				std::cout << "  ";	// Unoccupied cell
 			}
 		}
 		std::cout << u8"║" << std::endl;
@@ -198,7 +198,7 @@ void World::saveWorld() {
 		saveFile.close();
 		std::cout << "World saved!" << std::endl;
 	} else {
-		std::cout << "Failed to create/write to: " << SaveFilename << "." << std::endl;
+		std::cerr << "Failed to create/write to: " << SaveFilename << "." << std::endl;
 	}
 }
 
@@ -246,7 +246,7 @@ void World::loadWorld() {
 		saveFile.close();
 		std::cout << "World loaded from save!" << std::endl;
 	} else {
-		std::cout << "Failed to open/read from: " << SaveFilename << "." << std::endl;
+		std::cerr << "Failed to open/read from: " << SaveFilename << "." << std::endl;
 	}
 }
 

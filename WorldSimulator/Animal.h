@@ -7,7 +7,7 @@ private:
 	void breed(Organism* other);
 
 public:
-	Animal(int strength, int initiative, char symbol, int x, int y, World* world);
+	Animal(int strength, int initiative, std::string symbol, int x, int y, World* world);
 
 	virtual void action() override;
 	virtual void collision(Organism* other) override;

@@ -1,5 +1,7 @@
-#include "Grass.h"
+﻿#include "Grass.h"
 #include "OrganismFactory.h"
+
+const std::string Grass::Symbol = u8"🌿";
 
 bool Grass::registered = [] {
 	OrganismFactory::getInstance().registerType("Grass",

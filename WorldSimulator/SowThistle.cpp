@@ -1,5 +1,7 @@
-#include "SowThistle.h"
+﻿#include "SowThistle.h"
 #include "OrganismFactory.h"
+
+const std::string SowThistle::Symbol = u8"🌱";
 
 bool SowThistle::registered = [] {
 	OrganismFactory::getInstance().registerType("Sow Thistle",

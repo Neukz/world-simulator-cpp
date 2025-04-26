@@ -11,7 +11,7 @@ private:
 	bool alive = true;
 	int strength;
 	int initiative;
-	char symbol;
+	std::string symbol;
 	Position position;
 	Position prevPosition;
 
@@ -23,7 +23,7 @@ protected:
 	void reproduce();
 	
 public:
-	Organism(int strength, int initiative, char symbol, int x, int y, World* world);
+	Organism(int strength, int initiative, std::string symbol, int x, int y, World* world);
 
 	static bool compareByPosition(Organism* organism1, Organism* organism2);
 	static bool compareByInitiativeAndAge(Organism* organism1, Organism* organism2);

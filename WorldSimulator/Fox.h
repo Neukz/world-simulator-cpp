@@ -5,7 +5,7 @@ class Fox : public Animal {
 private:
 	static const int Strength = 3;
 	static const int Initiative = 7;
-	static const char Symbol = 'F';
+	static const std::string Symbol;
 
 	static bool registered;
 

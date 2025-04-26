@@ -1,6 +1,8 @@
-#include "SosnowskysHogweed.h"
+﻿#include "SosnowskysHogweed.h"
 #include "Animal.h"
 #include "OrganismFactory.h"
+
+const std::string SosnowskysHogweed::Symbol = u8"🍄";
 
 bool SosnowskysHogweed::registered = [] {
 	OrganismFactory::getInstance().registerType("Sosnowsky's Hogweed",

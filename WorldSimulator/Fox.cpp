@@ -1,5 +1,7 @@
-#include "Fox.h"
+﻿#include "Fox.h"
 #include "OrganismFactory.h"
+
+const std::string Fox::Symbol = u8"🦊";
 
 bool Fox::registered = [] {
 	OrganismFactory::getInstance().registerType("Fox",

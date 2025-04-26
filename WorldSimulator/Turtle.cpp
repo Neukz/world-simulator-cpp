@@ -1,5 +1,7 @@
-#include "Turtle.h"
+﻿#include "Turtle.h"
 #include "OrganismFactory.h"
+
+const std::string Turtle::Symbol = u8"🐢";
 
 bool Turtle::registered = [] {
 	OrganismFactory::getInstance().registerType("Turtle",

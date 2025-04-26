@@ -13,30 +13,32 @@
 #include "SosnowskysHogweed.h"
 
 int main() {
-	World* world = new World(20, 10);
+	World* world = new World(10, 10);
 	world->randomSeed();
 
-	//world->populate({
-	//	// Animals
-	//	Human::spawn(10, 8, world),
-	//	new Wolf(13, 3, world),
-	//	new Wolf(18, 2, world),
-	//	new Sheep(8, 2, world),
-	//	new Sheep(9, 3, world),
-	//	new Fox(15, 5, world),
-	//	new Fox(11, 5, world),
-	//	new Turtle(12, 7, world),
-	//	new Turtle(14, 7, world),
-	//	new Antelope(2, 8, world),
-	//	new Antelope(3, 9, world),
+	/*
+	world->populate({
+		// Animals
+		Human::spawn(10, 8, world),
+		new Wolf(13, 3, world),
+		new Wolf(18, 2, world),
+		new Sheep(8, 2, world),
+		new Sheep(9, 3, world),
+		new Fox(15, 5, world),
+		new Fox(11, 5, world),
+		new Turtle(12, 7, world),
+		new Turtle(14, 7, world),
+		new Antelope(2, 8, world),
+		new Antelope(3, 9, world),
 
-	//	// Plants
-	//	new Grass(9, 5, world),
-	//	new SowThistle(5, 8, world),
-	//	new Guarana(2, 6, world),
-	//	new Belladonna(7, 6, world),
-	//	new SosnowskysHogweed(10, 5, world)
-	//});
+		// Plants
+		new Grass(9, 5, world),
+		new SowThistle(5, 8, world),
+		new Guarana(2, 6, world),
+		new Belladonna(7, 6, world),
+		new SosnowskysHogweed(10, 5, world)
+	});
+	*/
 
 	try {
 		world->drawWorld();

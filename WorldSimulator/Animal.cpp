@@ -10,7 +10,7 @@ void Animal::breed(Organism* other) {
 #pragma endregion
 
 #pragma region Public methods
-Animal::Animal(int strength, int initiative, char symbol, int x, int y, World* world)
+Animal::Animal(int strength, int initiative, std::string symbol, int x, int y, World* world)
 	: Organism(strength, initiative, symbol, x, y, world) {}
 
 void Animal::action() {

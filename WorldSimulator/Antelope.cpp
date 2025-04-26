@@ -1,5 +1,7 @@
-#include "Antelope.h"
+﻿#include "Antelope.h"
 #include "OrganismFactory.h"
+
+const std::string Antelope::Symbol = u8"🦌";
 
 bool Antelope::registered = [] {
 	OrganismFactory::getInstance().registerType("Antelope",

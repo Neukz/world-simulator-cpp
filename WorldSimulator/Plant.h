@@ -10,7 +10,7 @@ private:
 	void sow();
 
 public:
-	Plant(int strength, char symbol, int x, int y, World* world);
+	Plant(int strength, std::string symbol, int x, int y, World* world);
 
 	virtual void action() override;
 	virtual void collision(Organism* other) override;

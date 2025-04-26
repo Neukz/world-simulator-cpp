@@ -1,7 +1,9 @@
-#include "Human.h"
+﻿#include "Human.h"
 #include "conio.h"
 #include <string>
 #include "OrganismFactory.h"
+
+const std::string Human::Symbol = u8"🚶‍♂️";
 
 const std::unordered_map<int, Human::Direction> Human::KeyToDirection = {
 	{72, Direction::Up},
