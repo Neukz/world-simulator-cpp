@@ -27,6 +27,9 @@ private:
 public:
 	World(int width, int height);
 
+	int getWidth() const;
+	int getHeight() const;
+
 	void makeTurn();
 	void drawWorld();
 	void populate(std::initializer_list<Organism*> organisms);
@@ -40,9 +43,6 @@ public:
 	Organism* getCollidingOrganism(Organism* organism) const;
 	Position getRandomFreeField() const;
 	Position getRandomFreeNeighboringField(Organism* organism) const;
-
-	int getWidth() const;
-	int getHeight() const;
 
 	~World();
 };

@@ -7,7 +7,6 @@ private:
 	static const int SowingProbability = 10;
 
 	virtual std::string toString() const = 0;
-	void sow();
 
 public:
 	Plant(int strength, std::string symbol, int x, int y, World* world);

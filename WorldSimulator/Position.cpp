@@ -6,22 +6,6 @@ const Position Position::InvalidPosition = Position(-1, -1);
 Position::Position(int x, int y)
 	: x(x), y(y) {}
 
-std::vector<Position> Position::getNeighbors(int range) const {
-	std::vector<Position> neighbors = {
-		Position(x, y - range),
-		Position(x, y + range),
-		Position(x - range, y),
-		Position(x + range, y)
-	};
-	return neighbors;
-}
-
-Position Position::getRandomNeighbor(int range) const {
-	std::vector<Position> neighbors = getNeighbors(range);
-	Position randomNeighbor = neighbors[rand() % neighbors.size()];
-	return randomNeighbor;
-}
-
 int Position::getX() const {
 	return x;
 }
@@ -38,19 +22,35 @@ void Position::setY(int y) {
 	this->y = y;
 }
 
+std::vector<Position> Position::getNeighbors(int range) const {
+	std::vector<Position> neighbors = {
+		Position(x, y - range),
+		Position(x, y + range),
+		Position(x - range, y),
+		Position(x + range, y)
+	};
+	return neighbors;
+}
+
+Position Position::getRandomNeighbor(int range) const {
+	std::vector<Position> neighbors = getNeighbors(range);
+	Position randomNeighbor = neighbors[rand() % neighbors.size()];
+	return randomNeighbor;
+}
+
 bool Position::operator<(const Position& other) const {
-	if (y == other.y) {
-		return x < other.x;	// If y is the same, smaller x is smaller position
+	if (this->y == other.y) {
+		return this->x < other.x;	// If y is the same, smaller x is smaller position
 	}
-	return y < other.y;	// Smaller y is smaller position
+	return this->y < other.y;	// Smaller y is smaller position
 }
 
 bool Position::operator==(const Position& other) const {
-	return x == other.x && y == other.y;
+	return this->x == other.x && this->y == other.y;
 }
 
 bool Position:: operator!=(const Position& other) const {
-	return x != other.x || y != other.y;
+	return this->x != other.x || this->y != other.y;
 }
 
 std::ostream& operator<<(std::ostream& out, const Position& position) {

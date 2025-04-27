@@ -85,6 +85,14 @@ Human* Human::getInstance() {
 	return instance;
 }
 
+void Human::setMagicalPotionActive(bool active) {
+	magicalPotionActive = active;
+}
+
+void Human::setMagicalPotionCooldown(int cooldown) {
+	magicalPotionCooldown = cooldown;
+}
+
 void Human::action() {
 	updateMagicalPotion();
 	Position position = getPosition();
@@ -132,13 +140,5 @@ std::string Human::serialize() const {
 		+ ',' + std::to_string(magicalPotionCooldown);
 
 	return serialized;
-}
-
-void Human::setMagicalPotionActive(bool active) {
-	magicalPotionActive = active;
-}
-
-void Human::setMagicalPotionCooldown(int cooldown) {
-	magicalPotionCooldown = cooldown;
 }
 #pragma endregion

@@ -39,9 +39,9 @@ public:
 	static Human* getInstance();
 	static void deleteInstance();
 
-	void action() override;
-	std::string serialize() const override;
-
 	void setMagicalPotionActive(bool active);
 	void setMagicalPotionCooldown(int cooldown);
+
+	void action() override;
+	std::string serialize() const override;
 };

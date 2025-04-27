@@ -28,24 +28,24 @@ public:
 	static bool compareByPosition(Organism* organism1, Organism* organism2);
 	static bool compareByInitiativeAndAge(Organism* organism1, Organism* organism2);
 
-	virtual void action() = 0;
-	virtual void collision(Organism* other) = 0;
-	virtual std::string serialize() const;
-
-	void draw() const;
-	std::string identify() const;
-
-	void mature();
-	void kill(Organism* killer);
-	void setAge(int age);
-	void setStrength(int strength);
-	void setPosition(const Position& newPosition);
-	void setPrevPosition(const Position& newPosition);
-
 	int getAge() const;
 	bool isAlive() const;
 	int getStrength() const;
 	int getInitiative() const;
 	Position getPosition() const;
 	Position getPrevPosition() const;
+
+	void setAge(int age);
+	void setStrength(int strength);
+	void setPosition(const Position& newPosition);
+	void setPrevPosition(const Position& newPosition);
+
+	void mature();
+	void kill(Organism* killer);
+	void draw() const;
+	std::string identify() const;
+
+	virtual std::string serialize() const;
+	virtual void action() = 0;
+	virtual void collision(Organism* other) = 0;
 };

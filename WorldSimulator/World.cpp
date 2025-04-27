@@ -86,6 +86,14 @@ World::World(int width, int height)
 	srand(time(nullptr));
 }
 
+int World::getWidth() const {
+	return width;
+}
+
+int World::getHeight() const {
+	return height;
+}
+
 void World::makeTurn() {
 	organisms.sort(Organism::compareByInitiativeAndAge);
 	int populationInTurn = organisms.size(), populationCount = 0;
@@ -298,14 +306,6 @@ Position World::getRandomFreeNeighboringField(Organism* organism) const {
 		neighbors.erase(neighbors.begin() + i);
 	}
 	return Position::InvalidPosition;	// All neighboring fields are occupied
-}
-
-int World::getWidth() const {
-	return width;
-}
-
-int World::getHeight() const {
-	return height;
 }
 
 World::~World() {

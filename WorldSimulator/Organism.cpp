@@ -33,6 +33,70 @@ bool Organism::compareByInitiativeAndAge(Organism* organism1, Organism* organism
 	return initiative1 > initiative2;	// Higher initiative is higher priority
 }
 
+int Organism::getAge() const {
+	return age;
+}
+
+bool Organism::isAlive() const {
+	return alive;
+}
+
+int Organism::getStrength() const {
+	return strength;
+}
+
+int Organism::getInitiative() const {
+	return initiative;
+}
+
+Position Organism::getPosition() const {
+	return position;
+}
+
+Position Organism::getPrevPosition() const {
+	return prevPosition;
+}
+
+void Organism::setAge(int age) {
+	this->age = age;
+}
+
+void Organism::setStrength(int strength) {
+	this->strength = strength;
+}
+
+void Organism::setPosition(const Position& newPosition) {
+	if (world->positionWithinBounds(newPosition)) {
+		int x = newPosition.getX();
+		int y = newPosition.getY();
+		position.setX(x);
+		position.setY(y);
+	}
+}
+
+void Organism::setPrevPosition(const Position& newPosition) {
+	prevPosition.setX(newPosition.getX());
+	prevPosition.setY(newPosition.getY());
+}
+
+void Organism::mature() {
+	age++;
+}
+
+void Organism::kill(Organism* killer) {
+	alive = false;
+	world->reportDeath(killer, this);
+}
+
+void Organism::draw() const {
+	std::cout << symbol;
+}
+
+
+std::string Organism::identify() const {
+	return toString();
+}
+
 std::string Organism::serialize() const {
 	// Convert fields to strings
 	std::vector<std::string> fields = {
@@ -52,68 +116,5 @@ std::string Organism::serialize() const {
 	}
 
 	return serialized;
-}
-
-void Organism::draw() const {
-	std::cout << symbol;
-}
-
-std::string Organism::identify() const {
-	return toString();
-}
-
-void Organism::mature() {
-	age++;
-}
-
-void Organism::setAge(int age) {
-	this->age = age;
-}
-
-void Organism::kill(Organism* killer) {
-	alive = false;
-	world->reportDeath(killer, this);
-}
-
-void Organism::setStrength(int strength) {
-	this->strength = strength;
-}
-
-int Organism::getAge() const {
-	return age;
-}
-
-bool Organism::isAlive() const {
-	return alive;
-}
-
-void Organism::setPosition(const Position& newPosition) {
-	if (world->positionWithinBounds(newPosition)) {
-		int x = newPosition.getX();
-		int y = newPosition.getY();
-		position.setX(x);
-		position.setY(y);
-	}
-}
-
-void Organism::setPrevPosition(const Position& newPosition) {
-	prevPosition.setX(newPosition.getX());
-	prevPosition.setY(newPosition.getY());
-}
-
-int Organism::getStrength() const {
-	return strength;
-}
-
-int Organism::getInitiative() const {
-	return initiative;
-}
-
-Position Organism::getPosition() const {
-	return position;
-}
-
-Position Organism::getPrevPosition() const {
-	return prevPosition;
 }
 #pragma endregion
