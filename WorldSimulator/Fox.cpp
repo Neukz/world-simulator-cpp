@@ -2,9 +2,10 @@
 #include "OrganismFactory.h"
 
 const std::string Fox::Symbol = u8"🦊";
+const std::string Fox::Species = "Fox";
 
 bool Fox::registered = [] {
-	OrganismFactory::getInstance().registerType("Fox",
+	OrganismFactory::getInstance().registerType(Species,
 		[](int x, int y, World* world) {
 		return new Fox(x, y, world);
 	});
@@ -12,8 +13,8 @@ bool Fox::registered = [] {
 }();
 
 #pragma region Private methods
-std::string Fox::toString() const {
-	return "Fox";
+std::string Fox::getSpecies() const {
+	return Species;
 }
 
 bool Fox::encounteredStrongerOrganism() {

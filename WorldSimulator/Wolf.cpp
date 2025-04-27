@@ -2,9 +2,10 @@
 #include "OrganismFactory.h"
 
 const std::string Wolf::Symbol = u8"🐺";
+const std::string Wolf::Species = "Wolf";
 
 bool Wolf::registered = [] {
-	OrganismFactory::getInstance().registerType("Wolf",
+	OrganismFactory::getInstance().registerType(Species,
 		[](int x, int y, World* world) {
 		return new Wolf(x, y, world);
 	});
@@ -12,8 +13,8 @@ bool Wolf::registered = [] {
 }();
 
 #pragma region Private methods
-std::string Wolf::toString() const {
-	return "Wolf";
+std::string Wolf::getSpecies() const {
+	return Species;
 }
 #pragma endregion
 

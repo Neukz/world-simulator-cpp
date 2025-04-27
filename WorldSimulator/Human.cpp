@@ -4,6 +4,7 @@
 #include "OrganismFactory.h"
 
 const std::string Human::Symbol = u8"🚶‍♂️";
+const std::string Human::Species = "Human";
 
 const std::unordered_map<int, Human::Direction> Human::KeyToDirection = {
 	{72, Direction::Up},
@@ -13,7 +14,7 @@ const std::unordered_map<int, Human::Direction> Human::KeyToDirection = {
 };
 
 bool Human::registered = [] {
-	OrganismFactory::getInstance().registerType("Human",
+	OrganismFactory::getInstance().registerType(Species,
 		[](int x, int y, World* world) {
 		return Human::spawn(x, y, world);
 	});
@@ -26,8 +27,8 @@ Human* Human::instance = nullptr;
 Human::Human(int x, int y, World* world)
 	: Animal(Strength, Initiative, Symbol, x, y, world) {}
 
-std::string Human::toString() const {
-	return "Human";
+std::string Human::getSpecies() const {
+	return Species;
 }
 
 bool Human::canUseMagicalPotion() const {

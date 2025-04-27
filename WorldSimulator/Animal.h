@@ -3,7 +3,7 @@
 
 class Animal : public Organism {
 private:
-	virtual std::string toString() const = 0;
+	virtual std::string getSpecies() const = 0;
 
 public:
 	Animal(int strength, int initiative, std::string symbol, int x, int y, World* world);

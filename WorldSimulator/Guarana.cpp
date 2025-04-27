@@ -2,9 +2,10 @@
 #include "OrganismFactory.h"
 
 const std::string Guarana::Symbol = u8"🍒";
+const std::string Guarana::Species = "Guarana";
 
 bool Guarana::registered = [] {
-	OrganismFactory::getInstance().registerType("Guarana",
+	OrganismFactory::getInstance().registerType(Species,
 		[](int x, int y, World* world) {
 		return new Guarana(x, y, world);
 	});
@@ -12,8 +13,8 @@ bool Guarana::registered = [] {
 }();
 
 #pragma region Private methods
-std::string Guarana::toString() const {
-	return "Guarana";
+std::string Guarana::getSpecies() const {
+	return Species;
 }
 
 void Guarana::boostEater(Organism* eater) {

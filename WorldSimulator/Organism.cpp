@@ -8,7 +8,7 @@ void Organism::reproduce() {
 		return;	// No space to reproduce
 	}
 
-	std::string type = identify();
+	std::string type = getSpecies();
 	int childX = childPosition.getX();
 	int childY = childPosition.getY();
 	Organism* child = OrganismFactory::getInstance().create(type, childX, childY, world);
@@ -92,15 +92,14 @@ void Organism::draw() const {
 	std::cout << symbol;
 }
 
-
 std::string Organism::identify() const {
-	return toString();
+	return getSpecies() + " (" + symbol + ")";
 }
 
 std::string Organism::serialize() const {
 	// Convert fields to strings
 	std::vector<std::string> fields = {
-		toString(),
+		getSpecies(),
 		std::to_string(age),
 		std::to_string(strength),
 		std::to_string(position.getX()),

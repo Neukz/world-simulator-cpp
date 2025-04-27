@@ -2,9 +2,10 @@
 #include "OrganismFactory.h"
 
 const std::string Turtle::Symbol = u8"🐢";
+const std::string Turtle::Species = "Turtle";
 
 bool Turtle::registered = [] {
-	OrganismFactory::getInstance().registerType("Turtle",
+	OrganismFactory::getInstance().registerType(Species,
 		[](int x, int y, World* world) {
 		return new Turtle(x, y, world);
 	});
@@ -12,8 +13,8 @@ bool Turtle::registered = [] {
 }();
 
 #pragma region Private methods
-std::string Turtle::toString() const {
-	return "Turtle";
+std::string Turtle::getSpecies() const {
+	return Species;
 }
 
 void Turtle::deflectAttack(Organism* attacker) const {

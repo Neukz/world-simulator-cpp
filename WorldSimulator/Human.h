@@ -14,6 +14,7 @@ private:
 	static const int Strength = 5;
 	static const int Initiative = 4;
 	static const std::string Symbol;
+	static const std::string Species;
 	// Map of arrow keys to Direction
 	static const std::unordered_map<int, Direction> KeyToDirection;
 	static const char MagicalPotionKey = ' ';
@@ -29,7 +30,7 @@ private:
 	Human(const Human&) = delete;
 	Human& operator=(const Human&) = delete;
 
-	std::string toString() const override;
+	std::string getSpecies() const override;
 	bool canUseMagicalPotion() const;
 	void useMagicalPotion();
 	void updateMagicalPotion();

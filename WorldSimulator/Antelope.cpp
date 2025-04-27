@@ -2,9 +2,10 @@
 #include "OrganismFactory.h"
 
 const std::string Antelope::Symbol = u8"🦌";
+const std::string Antelope::Species = "Antelope";
 
 bool Antelope::registered = [] {
-	OrganismFactory::getInstance().registerType("Antelope",
+	OrganismFactory::getInstance().registerType(Species,
 		[](int x, int y, World* world) {
 		return new Antelope(x, y, world);
 	});
@@ -12,8 +13,8 @@ bool Antelope::registered = [] {
 }();
 
 #pragma region Private methods
-std::string Antelope::toString() const {
-	return "Antelope";
+std::string Antelope::getSpecies() const {
+	return Species;
 }
 
 void Antelope::escape() {

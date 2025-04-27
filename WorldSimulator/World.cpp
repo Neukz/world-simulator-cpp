@@ -134,7 +134,7 @@ void World::makeTurn() {
 }
 
 void World::drawWorld() {
-	//eraseWorld();
+	eraseWorld();
 	printAuthor();
 	printTopBorder();
 

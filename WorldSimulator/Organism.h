@@ -15,7 +15,7 @@ private:
 	Position position;
 	Position prevPosition;
 
-	virtual std::string toString() const = 0;
+	virtual std::string getSpecies() const = 0;
 
 protected:
 	World* world;

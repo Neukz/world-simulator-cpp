@@ -3,9 +3,10 @@
 #include "OrganismFactory.h"
 
 const std::string SosnowskysHogweed::Symbol = u8"🍄";
+const std::string SosnowskysHogweed::Species = "Sosnowsky's Hogweed";
 
 bool SosnowskysHogweed::registered = [] {
-	OrganismFactory::getInstance().registerType("Sosnowsky's Hogweed",
+	OrganismFactory::getInstance().registerType(Species,
 		[](int x, int y, World* world) {
 		return new SosnowskysHogweed(x, y, world);
 	});
@@ -13,8 +14,8 @@ bool SosnowskysHogweed::registered = [] {
 }();
 
 #pragma region Private methods
-std::string SosnowskysHogweed::toString() const {
-	return "Sosnowsky's Hogweed";
+std::string SosnowskysHogweed::getSpecies() const {
+	return Species;
 }
 
 void SosnowskysHogweed::killNeighboringAnimals() {
