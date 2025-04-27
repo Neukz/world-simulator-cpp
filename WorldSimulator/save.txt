@@ -1,21 +1,22 @@
-Belladonna,0,99,5,0,5,0
-Sheep,0,4,9,0,9,0
-Sosnowsky's Hogweed,0,10,2,1,2,1
-Fox,0,3,3,1,3,1
-Wolf,0,9,7,1,7,1
-Sosnowsky's Hogweed,0,10,8,1,8,1
-Grass,0,0,3,3,3,3
-Human,0,5,7,3,7,3,0,0
-Belladonna,0,99,9,3,9,3
-Guarana,0,0,1,4,1,4
-Guarana,0,0,8,4,8,4
-Turtle,0,2,2,6,2,6
-Sheep,0,4,5,6,5,6
-Wolf,0,9,6,6,6,6
-Sow Thistle,0,0,2,7,2,7
-Turtle,0,2,6,7,6,7
-Antelope,0,4,9,7,9,7
-Fox,0,3,0,8,0,8
-Grass,0,0,2,8,2,8
-Antelope,0,4,2,9,2,9
-Sow Thistle,0,0,4,9,4,9
+Sosnowsky's Hogweed,2,10,0,0,0,0
+Grass,2,0,5,0,5,0
+Guarana,2,0,6,0,6,0
+Wolf,2,9,7,1,8,1
+Guarana,2,0,5,2,5,2
+Sow Thistle,0,0,6,2,6,2
+Sow Thistle,2,0,7,2,7,2
+Sosnowsky's Hogweed,2,10,9,2,9,2
+Human,2,5,1,3,2,3,0,-2
+Belladonna,2,99,9,3,9,3
+Fox,2,3,8,4,7,4
+Sow Thistle,1,0,0,5,0,5
+Antelope,2,4,1,5,3,5
+Sow Thistle,2,0,0,6,0,6
+Belladonna,2,99,5,6,5,6
+Antelope,2,4,6,6,6,8
+Fox,2,3,7,6,6,6
+Turtle,2,2,2,7,2,7
+Turtle,2,2,6,7,6,7
+Sheep,2,4,1,8,1,9
+Wolf,2,9,8,8,8,9
+Grass,2,0,5,9,5,9

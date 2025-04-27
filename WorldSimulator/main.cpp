@@ -13,7 +13,7 @@
 #include "SosnowskysHogweed.h"
 
 int main() {
-	World* world = new World(10, 10);
+	World* world = new World();
 	world->randomSeed();
 
 	/*

@@ -1,6 +1,5 @@
 ﻿#include "Human.h"
-#include "conio.h"
-#include <string>
+#include <conio.h>
 #include "OrganismFactory.h"
 
 const std::string Human::Symbol = u8"🚶‍♂️";
