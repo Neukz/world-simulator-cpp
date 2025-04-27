@@ -17,11 +17,10 @@ std::string Fox::toString() const {
 }
 
 bool Fox::encounteredStrongerOrganism() {
-	Organism* other = world->getCollidingOrganism(this);
-	if (other == nullptr) {
-		return false;
+	if (Organism* other = world->getCollidingOrganism(this)) {
+		return other->getStrength() > this->getStrength();
 	}
-	return other->getStrength() > this->getStrength();
+	return false;
 }
 #pragma endregion
 
@@ -35,8 +34,9 @@ void Fox::action() {
 	while (!neighbors.empty()) {
 		int i = rand() % neighbors.size();
 		Position randomNeighbor = neighbors[i];
-		setPosition(randomNeighbor);
 		neighbors.erase(neighbors.begin() + i);
+
+		setPosition(randomNeighbor);
 		if (position != getPosition() && !encounteredStrongerOrganism()) {
 			setPrevPosition(position);
 			break;

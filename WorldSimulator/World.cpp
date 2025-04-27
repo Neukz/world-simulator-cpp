@@ -95,7 +95,12 @@ int World::getHeight() const {
 }
 
 void World::makeTurn() {
+	for (Organism* organism : organisms) {
+		organism->mature();
+	}
+
 	organisms.sort(Organism::compareByInitiativeAndAge);
+
 	int populationInTurn = organisms.size(), populationCount = 0;
 	for (Organism* organism : organisms) {
 		// Prevent new organisms from calling action() in the same turn they were spawned
@@ -108,10 +113,12 @@ void World::makeTurn() {
 			continue;
 		}
 
-		organism->mature();
-
 		if (dynamic_cast<Human*>(organism)) {
-			std::cout << "Human's turn..." << std::endl;
+			std::cout
+				<< "\033[33m"
+				<< "Human's turn..."
+				<< "\033[0m"
+				<< std::endl;
 		}
 		organism->action();
 
@@ -127,15 +134,17 @@ void World::makeTurn() {
 }
 
 void World::drawWorld() {
-	eraseWorld();
+	//eraseWorld();
 	printAuthor();
 	printTopBorder();
 
-	// Sort organisms by position an draw them
 	organisms.sort(Organism::compareByPosition);
+
+	// Draw organisms and vetical borders
 	auto organism = organisms.begin();
 	for (int y = 0; y < height; y++) {
 		std::cout << u8"║";
+
 		for (int x = 0; x < width; x++) {
 			if (organism != organisms.end() && (*organism)->getPosition() == Position(x, y)) {
 				(*organism)->draw();
@@ -144,6 +153,7 @@ void World::drawWorld() {
 				std::cout << "  ";	// Unoccupied cell
 			}
 		}
+
 		std::cout << u8"║" << std::endl;
 	}
 
@@ -153,7 +163,17 @@ void World::drawWorld() {
 
 void World::populate(std::initializer_list<Organism*> organisms) {
 	for (Organism* organism : organisms) {
-		addOrganism(organism);
+		if (getCollidingOrganism(organism) == nullptr) {
+			addOrganism(organism);
+		} else {
+			std::cerr
+				<< "Could not spawn "
+				<< organism->identify()
+				<< " at "
+				<< organism->getPosition()
+				<< ". The field is already occupied."
+				<< std::endl;
+		}
 	}
 }
 
@@ -204,58 +224,78 @@ void World::saveWorld() {
 			saveFile << organism->serialize() << std::endl;
 		}
 		saveFile.close();
-		std::cout << "World saved!" << std::endl;
+
+		std::cout
+			<< "\033[36m"
+			<< "World saved!"
+			<< "\033[0m"
+			<< std::endl;
 	} else {
-		std::cerr << "Failed to create/write to: " << SaveFilename << "." << std::endl;
+		std::cerr
+			<< "\033[35m"
+			<< "Failed to create/write to: "
+			<< SaveFilename
+			<< ".\033[0m"
+			<< std::endl;
 	}
 }
 
 void World::loadWorld() {
 	std::ifstream saveFile(SaveFilename);
 	std::string serializedOrganism;
-	if (saveFile.is_open()) {
-		clearOrganisms();
+	if (!saveFile.is_open()) {
+		std::cerr
+			<< "\033[35m"
+			<< "Failed to open/read from: "
+			<< SaveFilename
+			<< ".\033[0m"
+			<< std::endl;
+		return;
+	}
 
-		while (std::getline(saveFile, serializedOrganism)) {
-			// Extract values
-			std::stringstream fieldStream(serializedOrganism);
-			std::string field;
-			std::vector<std::string> fields;
-			while (std::getline(fieldStream, field, ',')) {
-				fields.push_back(field);
-			}
+	clearOrganisms();
 
-			// Convert to appropriate types
-			std::string type = fields[0];
-			int age = std::stoi(fields[1]);
-			int strength = std::stoi(fields[2]);
-			int x = std::stoi(fields[3]);
-			int y = std::stoi(fields[4]);
-			int prevX = std::stoi(fields[5]);
-			int prevY = std::stoi(fields[6]);
-			
-			// Create the organism and restore its properties
-			Organism* organism = OrganismFactory::getInstance().create(type, x, y, this);
-			organism->setAge(age);
-			organism->setStrength(strength);
-			organism->setPrevPosition(Position(prevX, prevY));
-
-			// Restore Human-specific fields
-			if (Human* human = dynamic_cast<Human*>(organism)) {
-				bool magicalPotionActive = fields[7] == "1";
-				int magicalPotionCooldown = std::stoi(fields[8]);
-				human->setMagicalPotionActive(magicalPotionActive);
-				human->setMagicalPotionCooldown(magicalPotionCooldown);
-			}
-
-			addOrganism(organism);
+	while (std::getline(saveFile, serializedOrganism)) {
+		// Extract values
+		std::stringstream fieldStream(serializedOrganism);
+		std::string field;
+		std::vector<std::string> fields;
+		while (std::getline(fieldStream, field, ',')) {
+			fields.push_back(field);
 		}
 
-		saveFile.close();
-		std::cout << "World loaded from save!" << std::endl;
-	} else {
-		std::cerr << "Failed to open/read from: " << SaveFilename << "." << std::endl;
+		// Convert to appropriate types
+		std::string type = fields[0];
+		int age = std::stoi(fields[1]);
+		int strength = std::stoi(fields[2]);
+		int x = std::stoi(fields[3]);
+		int y = std::stoi(fields[4]);
+		int prevX = std::stoi(fields[5]);
+		int prevY = std::stoi(fields[6]);
+
+		// Create the organism and restore its properties
+		Organism* organism = OrganismFactory::getInstance().create(type, x, y, this);
+		organism->setAge(age);
+		organism->setStrength(strength);
+		organism->setPrevPosition(Position(prevX, prevY));
+
+		// Restore Human-specific fields
+		if (Human* human = dynamic_cast<Human*>(organism)) {
+			bool magicalPotionActive = fields[7] == "1";
+			int magicalPotionCooldown = std::stoi(fields[8]);
+			human->setMagicalPotionActive(magicalPotionActive);
+			human->setMagicalPotionCooldown(magicalPotionCooldown);
+		}
+
+		addOrganism(organism);
 	}
+	saveFile.close();
+
+	std::cout
+		<< "\033[36m"
+		<< "World loaded from save!"
+		<< "\033[0m"
+		<< std::endl;
 }
 
 bool World::positionWithinBounds(const Position& position) const {
@@ -305,6 +345,7 @@ Position World::getRandomFreeNeighboringField(Organism* organism) const {
 		}
 		neighbors.erase(neighbors.begin() + i);
 	}
+
 	return Position::InvalidPosition;	// All neighboring fields are occupied
 }
 

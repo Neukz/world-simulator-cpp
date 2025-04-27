@@ -39,7 +39,11 @@ void Human::useMagicalPotion() {
 	magicalPotionCooldown = 0;
 	setStrength(10);
 	updateMagicalPotion();
-	std::cout << "Magical potion used!" << std::endl;
+	std::cout
+		<< "\033[33m"
+		<< "Magical potion used!"
+		<< "\033[0m"
+		<< std::endl;
 }
 
 void Human::updateMagicalPotion() {
@@ -53,7 +57,11 @@ void Human::updateMagicalPotion() {
 		// If active and reached 5, deactivate
 		if (magicalPotionCooldown == 5) {
 			magicalPotionActive = false;
-			std::cout << "Magical potion expired!" << std::endl;
+			std::cout
+				<< "\033[33m"
+				<< "Magical potion expired!"
+				<< "\033[0m"
+				<< std::endl;
 
 			// If smaller than 5, accumulate cooldown
 		} else if (magicalPotionCooldown < 5) {
@@ -95,6 +103,7 @@ void Human::setMagicalPotionCooldown(int cooldown) {
 
 void Human::action() {
 	updateMagicalPotion();
+
 	Position position = getPosition();
 	int x = position.getX();
 	int y = position.getY();

@@ -18,11 +18,13 @@ std::string Antelope::toString() const {
 
 void Antelope::escape() {
 	Position position = getPosition();
-	do {
-		Position randomNeighbor = position.getRandomNeighbor();
-		setPosition(randomNeighbor);
-	} while (position == getPosition() || world->getCollidingOrganism(this) != nullptr);
-	setPrevPosition(position);
+	Position randomNeighbor = world->getRandomFreeNeighboringField(this);
+	if (randomNeighbor == Position::InvalidPosition) {
+		return;	// No space to escape
+	}
+	
+	setPrevPosition(getPosition());
+	setPosition(randomNeighbor);
 }
 #pragma endregion
 
