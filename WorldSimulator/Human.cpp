@@ -35,15 +35,10 @@ bool Human::canUseMagicalPotion() const {
 }
 
 void Human::useMagicalPotion() {
-	magicalPotionActive = true;
+	setMagicalPotionActive(true);
 	magicalPotionCooldown = 0;
 	setStrength(10);
 	updateMagicalPotion();
-	std::cout
-		<< "\033[33m"
-		<< "Magical potion used!"
-		<< "\033[0m"
-		<< std::endl;
 }
 
 void Human::updateMagicalPotion() {
@@ -94,6 +89,14 @@ Human* Human::getInstance() {
 }
 
 void Human::setMagicalPotionActive(bool active) {
+	if (active) {
+		std::cout
+			<< "\033[33m"
+			<< "Magical potion used!"
+			<< "\033[0m"
+			<< std::endl;
+	}
+
 	magicalPotionActive = active;
 }
 
